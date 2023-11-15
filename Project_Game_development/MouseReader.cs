@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal class MouseReader
+    internal static class MouseReader
     {
-        public Vector2 GetMouseVector()
+        public static Vector2 GetMouseVector()
         {
             MouseState state = Mouse.GetState();
             return new Vector2(state.X, state.Y);
