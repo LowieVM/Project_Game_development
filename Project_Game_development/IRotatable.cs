@@ -2,7 +2,7 @@
 
 namespace Project_Game_development
 {
-    internal interface IRotatable
+    internal interface IRotatable : IPositional
     {
         public float Rotation { get; set; }
         public Vector2 RotationPoint { get; set; }
