@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_Game_development.Content
+namespace Project_Game_development
 {
     internal class Player
     {
