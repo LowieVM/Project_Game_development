@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Project_Game_development
 {
     enum PlayerState { Walking, Running, Pistol, Shotgun, ShotgunReloading, MiniGun, MiniGunShoot, Flamethrower }
-    internal class Player
+    internal class Player : IRotatable
     {
         private Texture2D walkTexture;
         private Texture2D runTexture;
@@ -35,6 +35,8 @@ namespace Project_Game_development
         public PlayerState PlayerState { get; set; }
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; }
+        private RotationManager rotationManager;
+        private MouseReader mouseReader = new MouseReader();
 
         public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture)
         {
@@ -68,6 +70,9 @@ namespace Project_Game_development
             PlayerState = PlayerState.Pistol;
             currentTexture = this.pistolTexture;
             currentAnimation = pistolAnimation;
+
+
+            rotationManager = new RotationManager(this, mouseReader);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -124,8 +129,7 @@ namespace Project_Game_development
             }
 
 
-            Vector2 playerToMouse = MouseReader.GetMouseVector() - Position;
-            Rotation = (float)Math.Atan2(playerToMouse.Y, playerToMouse.X);
+            rotationManager.Update();
 
 
             currentAnimation.Update(gameTime);
