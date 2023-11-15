@@ -6,12 +6,14 @@ namespace Project_Game_development
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private Texture2D playerWalkTexture;
+        private Player player;
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -19,15 +21,16 @@ namespace Project_Game_development
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
+            player = new Player(playerWalkTexture);
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            playerWalkTexture = Content.Load<Texture2D>("player_walk_strip6");
         }
 
         protected override void Update(GameTime gameTime)
@@ -36,6 +39,7 @@ namespace Project_Game_development
                 Exit();
 
             // TODO: Add your update logic here
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -45,6 +49,9 @@ namespace Project_Game_development
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
