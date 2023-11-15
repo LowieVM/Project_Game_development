@@ -82,34 +82,42 @@ namespace Project_Game_development
                 case PlayerState.Walking:
                     currentTexture = walkTexture;
                     currentAnimation = walkAnimation;
+                    RotationPoint = new Vector2(17, 31);
                     break;
                 case PlayerState.Running:
                     currentTexture = runTexture;
                     currentAnimation = runAnimation;
+                    RotationPoint = new Vector2(45, 45);
                     break;
                 case PlayerState.Pistol:
                     currentTexture = pistolTexture;
                     currentAnimation = pistolAnimation;
+                    RotationPoint = new Vector2(26, 31);
                     break;
                 case PlayerState.Shotgun:
                     currentTexture = shotgunTexture;
                     currentAnimation = shotgunAnimation;
+                    RotationPoint = new Vector2(34, 26);
                     break;
                 case PlayerState.ShotgunReloading:
                     currentTexture = shotgunReloadTexture;
                     currentAnimation = shotgunReloadAnimation;
+                    RotationPoint = new Vector2(34, 26);
                     break;
                 case PlayerState.MiniGun:
                     currentTexture = minigunTexture;
                     currentAnimation = minigunAnimation;
+                    RotationPoint = new Vector2(13, 15);
                     break;
                 case PlayerState.MiniGunShoot:
                     currentTexture = minigunShootTexture;
                     currentAnimation = minigunShootAnimation;
+                    RotationPoint = new Vector2(13, 15);
                     break;
                 case PlayerState.Flamethrower:
                     currentTexture = flamethrowerTexture;
                     currentAnimation = flamethrowerAnimation;
+                    RotationPoint = new Vector2(34, 26);
                     break;
                 default:
                     break;
@@ -118,7 +126,6 @@ namespace Project_Game_development
 
             Vector2 playerToMouse = MouseReader.GetMouseVector() - Position;
             Rotation = (float)Math.Atan2(playerToMouse.Y, playerToMouse.X);
-            RotationPoint = new Vector2(26, 31);
 
 
             currentAnimation.Update(gameTime);
