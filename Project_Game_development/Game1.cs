@@ -9,6 +9,7 @@ namespace Project_Game_development
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private Texture2D playerWalkTexture;
+        private Texture2D playerRunTexture;
         private Player player;
 
         public Game1()
@@ -22,7 +23,7 @@ namespace Project_Game_development
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            player = new Player(playerWalkTexture);
+            player = new Player(playerWalkTexture, playerRunTexture);
         }
 
         protected override void LoadContent()
@@ -31,6 +32,7 @@ namespace Project_Game_development
 
             // TODO: use this.Content to load your game content here
             playerWalkTexture = Content.Load<Texture2D>("player_walk_strip6");
+            playerRunTexture = Content.Load<Texture2D>("player_run_strip6");
         }
 
         protected override void Update(GameTime gameTime)
