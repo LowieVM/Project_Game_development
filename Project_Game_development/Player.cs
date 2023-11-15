@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
+    enum PlayerState { Walking, Runing, Pistol, Shotgun, ShotgunReloading, MiniGun, MiniGuNReloading, Flamethrower }
     internal class Player
     {
         private Texture2D walkTexture;
