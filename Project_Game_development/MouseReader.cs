@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal static class MouseReader
+    internal class MouseReader : IPositional
     {
-        public static Vector2 GetMouseVector()
+        public Vector2 Position { get; set; }
+        public void UpdateMouseVector()
         {
             MouseState state = Mouse.GetState();
-            return new Vector2(state.X, state.Y);
+            Position = new Vector2(state.X, state.Y);
         }
     }
 }
