@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,11 @@ namespace Project_Game_development
         private int currentFrameNum = 0;
         private double elapsedTime = 0;
 
-        public Animation(int fps)
+        public Animation(int fps, Texture2D texture, int xSprites, int ySprites)
         {
             frames = new List<AnimationFrame>();
             Fps = fps;
+            GetFrames(texture, xSprites, ySprites);
         }
 
         public void AddFrame(AnimationFrame frame)
@@ -43,14 +45,14 @@ namespace Project_Game_development
             }
         }
 
-        public void GetFramesFromTextureProps(int width, int height, int xSprites, int ySprites)
+        public void GetFrames(Texture2D texture, int xSprites, int ySprites)
         {
-            int frameWidth = width / xSprites;
-            int frameHeight = height / ySprites;
+            int frameWidth = texture.Width / xSprites;
+            int frameHeight = texture.Height / ySprites;
 
-            for (int y = 0; y <= height - frameHeight; y += frameHeight)
+            for (int y = 0; y <= texture.Height - frameHeight; y += frameHeight)
             {
-                for (int x = 0; x <= width - frameWidth; x += frameWidth)
+                for (int x = 0; x <= texture.Width - frameWidth; x += frameWidth)
                 {
                     frames.Add(new AnimationFrame(new Rectangle(x, y, frameWidth, frameHeight)));
                 }
