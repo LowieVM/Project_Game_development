@@ -31,8 +31,10 @@ namespace Project_Game_development
         private Animation flamethrowerAnimation;
         private Animation currentAnimation;
         private SpriteEffects effect = SpriteEffects.None;
-        public Vector2 Position { get; set; }
+        public Vector2 Position { get; set; } = new Vector2(50, 50);
         public PlayerState PlayerState { get; set; }
+        public float Rotation { get; set; } = 0;
+        public Vector2 RotationPoint { get; set; }
 
         public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture)
         {
@@ -70,7 +72,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, 1f, effect, 0f);
+            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
         }
 
         public void Update(GameTime gameTime)
@@ -112,6 +114,11 @@ namespace Project_Game_development
                 default:
                     break;
             }
+
+
+            Vector2 playerToMouse = MouseReader.GetMouseVector() - Position;
+            Rotation = (float)Math.Atan2(playerToMouse.Y, playerToMouse.X);
+            RotationPoint = new Vector2(26, 31);
 
 
             currentAnimation.Update(gameTime);
