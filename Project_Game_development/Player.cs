@@ -22,20 +22,20 @@ namespace Project_Game_development
         public Vector2 RotationPoint { get; set; }
         private RotationManager rotationManager;
         private MouseReader mouseReader = new MouseReader();
-        private Dictionary<PlayerState, PlayerStateData> playerStateMappings;
+        private Dictionary<PlayerState, SpriteProperties> playerStateMappings;
 
         public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture)
         {
-            playerStateMappings = new Dictionary<PlayerState, PlayerStateData>
+            playerStateMappings = new Dictionary<PlayerState, SpriteProperties>
             {
-                { PlayerState.Walking, new PlayerStateData(walkTexture, new Animation(12, walkTexture, 6, 1), new Vector2(17, 31)) },
-                { PlayerState.Running, new PlayerStateData(runTexture, new Animation(12, runTexture, 6, 1), new Vector2(45, 45)) },
-                { PlayerState.Pistol, new PlayerStateData(pistolTexture, new Animation(1, pistolTexture, 1, 1), new Vector2(26, 31)) },
-                { PlayerState.Shotgun, new PlayerStateData(shotgunTexture, new Animation(1, shotgunTexture, 1, 1), new Vector2(34, 26)) },
-                { PlayerState.ShotgunReloading, new PlayerStateData(shotgunReloadTexture, new Animation(12, shotgunReloadTexture, 5, 1), new Vector2(34, 26)) },
-                { PlayerState.MiniGun, new PlayerStateData(minigunTexture, new Animation(1, minigunTexture, 1, 1), new Vector2(13, 15)) },
-                { PlayerState.MiniGunShoot, new PlayerStateData(minigunShootTexture, new Animation(12, minigunShootTexture, 2, 1), new Vector2(13, 15)) },
-                { PlayerState.Flamethrower, new PlayerStateData(flamethrowerTexture, new Animation(1, flamethrowerTexture, 1, 1), new Vector2(34, 26)) }
+                { PlayerState.Walking, new SpriteProperties(walkTexture, 12, 6, 1, new Vector2(17, 31)) },
+                { PlayerState.Running, new SpriteProperties(runTexture, 12, 6, 1, new Vector2(45, 45)) },
+                { PlayerState.Pistol, new SpriteProperties(pistolTexture, new Vector2(26, 31)) },
+                { PlayerState.Shotgun, new SpriteProperties(shotgunTexture, new Vector2(34, 26)) },
+                { PlayerState.ShotgunReloading, new SpriteProperties(shotgunReloadTexture, 12, 5, 1, new Vector2(34, 26)) },
+                { PlayerState.MiniGun, new SpriteProperties(minigunTexture, new Vector2(13, 15)) },
+                { PlayerState.MiniGunShoot, new SpriteProperties(minigunShootTexture, 12, 2, 1, new Vector2(13, 15)) },
+                { PlayerState.Flamethrower, new SpriteProperties(flamethrowerTexture, new Vector2(34, 26)) }
             };
 
             PlayerState = PlayerState.Pistol;

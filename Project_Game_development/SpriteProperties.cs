@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal class PlayerStateData
+    internal class SpriteProperties
     {
         public Texture2D Texture { get; set; }
         public Animation Animation { get; set; }
         public Vector2 RotationPoint { get; set; }
 
-        public PlayerStateData(Texture2D texture, Animation animation, Vector2 rotationPoint)
+        public SpriteProperties(Texture2D texture, int fps, int xSprites, int ySprites, Vector2 rotationPoint)
         {
             Texture = texture;
-            Animation = animation;
+            Animation = new Animation(fps, texture, xSprites, ySprites);
             RotationPoint = rotationPoint;
+        }
+        public SpriteProperties(Texture2D texture, Vector2 rotationPoint) : this(texture, 1, 1, 1, rotationPoint)
+        {
+
         }
     }
 }
