@@ -55,6 +55,7 @@ namespace Project_Game_development
             currentAnimation = playerStateMappings[PlayerState].Animation;
             RotationPoint = playerStateMappings[PlayerState].RotationPoint;
 
+            mouseReader.Update();
             rotationManager.Update();
             currentAnimation.Update(gameTime);
         }
