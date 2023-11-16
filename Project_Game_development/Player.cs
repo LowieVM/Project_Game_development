@@ -41,6 +41,7 @@ namespace Project_Game_development
             PlayerState = PlayerState.Pistol;
             currentTexture = playerStateMappings[PlayerState].Texture;
             currentAnimation = playerStateMappings[PlayerState].Animation;
+            RotationPoint = playerStateMappings[PlayerState].RotationPoint;
 
 
             rotationManager = new RotationManager(this, mouseReader);

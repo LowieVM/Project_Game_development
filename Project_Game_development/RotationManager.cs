@@ -24,8 +24,8 @@ namespace Project_Game_development
                 MouseReader mouse = target as MouseReader;
                 mouse.UpdateMouseVector();
             }
-            Vector2 playerToTarged = target.Position - rotatable.Position;
-            rotatable.Rotation = (float)Math.Atan2(playerToTarged.Y, playerToTarged.X);
+            Vector2 playerToTarget = target.Position - rotatable.Position;
+            rotatable.Rotation = (float)Math.Atan2(playerToTarget.Y, playerToTarget.X);
         }
     }
 }
