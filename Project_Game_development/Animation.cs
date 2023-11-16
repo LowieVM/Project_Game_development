@@ -10,7 +10,7 @@ namespace Project_Game_development
 {
     internal class Animation
     {
-        public AnimationFrame CurrentFrame { get; set; }
+        public AnimationFrame CurrentFrame { get; private set; }
         public int Fps;
         private List<AnimationFrame> frames;
         private int currentFrameNum = 0;
