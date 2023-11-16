@@ -21,7 +21,7 @@ namespace Project_Game_development
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; }
         private RotationManager rotationManager;
-        private MouseReader mouseReader = new MouseReader();
+        private MouseReader mouseReader;
         private Dictionary<PlayerState, SpriteProperties> playerStateMappings;
 
         public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture)
@@ -39,11 +39,8 @@ namespace Project_Game_development
             };
 
             PlayerState = PlayerState.Pistol;
-            currentTexture = playerStateMappings[PlayerState].Texture;
-            currentAnimation = playerStateMappings[PlayerState].Animation;
-            RotationPoint = playerStateMappings[PlayerState].RotationPoint;
 
-
+            mouseReader = new MouseReader();
             rotationManager = new RotationManager(this, mouseReader);
         }
 
@@ -58,12 +55,8 @@ namespace Project_Game_development
             currentAnimation = playerStateMappings[PlayerState].Animation;
             RotationPoint = playerStateMappings[PlayerState].RotationPoint;
 
-
             rotationManager.Update();
-
-
             currentAnimation.Update(gameTime);
         }
-
     }
 }
