@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal class MoveManger
+    internal class MoveManager
     {
         private Vector2 currentAcceleration = new Vector2(1, 1);
         public void Move(IMovable movable)

@@ -35,7 +35,7 @@ namespace Project_Game_development
         public float MaxSpeed { get; set; } = 5;
         public Vector2 MoveDirection { get; set; } = new Vector2(10, 10);
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
-        private MoveManger mover = new MoveManger();
+        private MoveManager mover = new MoveManager();
 
         private Texture2D bulletTexture;
 
