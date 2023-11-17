@@ -43,7 +43,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
+            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0f);
         }
 
     }

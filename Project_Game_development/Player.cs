@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +28,6 @@ namespace Project_Game_development
 
 
 
-        Bullet bul;
 
 
         public KeyboardReader Keyboard { get; set; }
@@ -35,6 +36,12 @@ namespace Project_Game_development
         public Vector2 MoveDirection { get; set; } = new Vector2(10, 10);
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
         private MoveManger mover = new MoveManger();
+
+        private Texture2D bulletTexture;
+
+        private MouseState mouseState = new MouseState();
+        private List<Bullet> bullets = new List<Bullet>();
+
 
 
 
@@ -62,23 +69,42 @@ namespace Project_Game_development
 
 
 
-            bul = new Bullet(bulletTexture, new Vector2(0, 500), new Vector2(1000, 200));
+            this.bulletTexture = bulletTexture;
+
+        }
+
+        private bool wasLeftButtonPressed = false;
+
+        public void CreateBullet()
+        {
+            mouseState = Mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed && !wasLeftButtonPressed)
+            {
+                Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
+                bullets.Add(new Bullet(bulletTexture, Position, mousePosition));
+            }
+
+            wasLeftButtonPressed = (mouseState.LeftButton == ButtonState.Pressed);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            bul.Draw(spriteBatch);
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                bullets[i].Draw(spriteBatch);
+            }
+
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
         }
 
         public void Update(GameTime gameTime)
         {
 
-
-
-            bul.Update(gameTime);
-
-
+            CreateBullet();
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                bullets[i].Update(gameTime);
+            }
 
             currentTexture = playerStateMappings[PlayerState].Texture;
             currentAnimation = playerStateMappings[PlayerState].Animation;
