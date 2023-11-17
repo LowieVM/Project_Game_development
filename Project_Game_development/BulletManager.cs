@@ -29,7 +29,7 @@ namespace Project_Game_development
             {
                 bullets[i].Update(gameTime);
 
-                if (IsBulletOutOfBounds(bullets[i]))
+                if (IsBulletOutOfBounds(bullets[i].Position, 1920, 1080))
                 {
                     bullets.RemoveAt(i);
                     i--;
@@ -45,9 +45,16 @@ namespace Project_Game_development
             }
         }
 
-        private bool IsBulletOutOfBounds(Bullet bullet)
+        private bool IsBulletOutOfBounds(Vector2 position, int screenWidth, int screenHeight)
         {
-            return false;
+            if (position.X < 0 || position.X > screenWidth || position.Y < 0 || position.Y > screenHeight)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
