@@ -18,6 +18,8 @@ namespace Project_Game_development
         private Texture2D playerMinigunShootTexture;
         private Texture2D playerFlamethrowerTexture;
 
+        private Texture2D bulletTexture;
+
         private Player player;
 
 
@@ -36,7 +38,7 @@ namespace Project_Game_development
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            player = new Player(playerWalkTexture, playerRunTexture, playerPistolTexture, playerShotgunTexture, playerShotgunReloadTexture, playerMinigunTexture, playerMinigunShootTexture, playerFlamethrowerTexture);
+            player = new Player(playerWalkTexture, playerRunTexture, playerPistolTexture, playerShotgunTexture, playerShotgunReloadTexture, playerMinigunTexture, playerMinigunShootTexture, playerFlamethrowerTexture, bulletTexture);
         }
 
         protected override void LoadContent()
@@ -52,6 +54,9 @@ namespace Project_Game_development
             playerMinigunTexture = Content.Load<Texture2D>("player_chaingun");
             playerMinigunShootTexture = Content.Load<Texture2D>("player_chaingun_shoot_strip2");
             playerFlamethrowerTexture = Content.Load<Texture2D>("player_flamethrower");
+
+            bulletTexture = Content.Load<Texture2D>("bullet");
+
         }
 
         protected override void Update(GameTime gameTime)

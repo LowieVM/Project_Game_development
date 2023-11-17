@@ -26,6 +26,9 @@ namespace Project_Game_development
 
 
 
+        Bullet bul;
+
+
         public KeyboardReader Keyboard { get; set; }
         public Vector2 InitialSpeed { get; set; } = new Vector2(1, 1);
         public float MaxSpeed { get; set; } = 5;
@@ -35,7 +38,7 @@ namespace Project_Game_development
 
 
 
-        public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture)
+        public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture, Texture2D bulletTexture)
         {
             playerStateMappings = new Dictionary<PlayerState, SpriteProperties>
             {
@@ -55,15 +58,28 @@ namespace Project_Game_development
             rotationManager = new RotationManager(this, mouseReader);
 
             Keyboard = new KeyboardReader();
+
+
+
+
+            bul = new Bullet(bulletTexture, new Vector2(0, 500), new Vector2(1000, 200));
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            bul.Draw(spriteBatch);
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
         }
 
         public void Update(GameTime gameTime)
         {
+
+
+
+            bul.Update(gameTime);
+
+
+
             currentTexture = playerStateMappings[PlayerState].Texture;
             currentAnimation = playerStateMappings[PlayerState].Animation;
             RotationPoint = playerStateMappings[PlayerState].RotationPoint;
