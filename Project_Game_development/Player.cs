@@ -39,8 +39,8 @@ namespace Project_Game_development
 
         private Texture2D bulletTexture;
 
-        private MouseState mouseState = new MouseState();
-        private List<Bullet> bullets = new List<Bullet>();
+        private MouseState mouseState;
+        private BulletManager bulletManager;
 
 
 
@@ -69,7 +69,7 @@ namespace Project_Game_development
 
 
 
-            this.bulletTexture = bulletTexture;
+            bulletManager = new BulletManager(bulletTexture);
 
         }
 
@@ -81,7 +81,7 @@ namespace Project_Game_development
             if (mouseState.LeftButton == ButtonState.Pressed && !wasLeftButtonPressed)
             {
                 Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                bullets.Add(new Bullet(bulletTexture, Position, mousePosition));
+                bulletManager.CreateBullet(Position, mousePosition);
             }
 
             wasLeftButtonPressed = (mouseState.LeftButton == ButtonState.Pressed);
@@ -89,11 +89,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                bullets[i].Draw(spriteBatch);
-            }
-
+            bulletManager.Draw(spriteBatch);
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
         }
 
@@ -101,10 +97,8 @@ namespace Project_Game_development
         {
 
             CreateBullet();
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                bullets[i].Update(gameTime);
-            }
+            bulletManager.Update(gameTime);
+
 
             currentTexture = playerStateMappings[PlayerState].Texture;
             currentAnimation = playerStateMappings[PlayerState].Animation;
