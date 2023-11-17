@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal interface IMovable
+    internal interface IMovable : IPositional
     {
-        Vector2 Position { get; set; }
         Vector2 InitialSpeed { get; set; }
         float MaxSpeed { get; set; }
         Vector2 MoveDirection { get; set; }
