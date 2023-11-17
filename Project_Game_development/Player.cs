@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Project_Game_development
 {
     enum PlayerState { Walking, Running, Pistol, Shotgun, ShotgunReloading, MiniGun, MiniGunShoot, Flamethrower }
-    internal class Player : IRotatable
+    internal class Player : IRotatable, IMovable
     {
         private Texture2D currentTexture;
         private Animation currentAnimation;
@@ -23,6 +23,17 @@ namespace Project_Game_development
         private RotationManager rotationManager;
         private MouseReader mouseReader;
         private Dictionary<PlayerState, SpriteProperties> playerStateMappings;
+
+
+
+        public KeyboardReader Keyboard { get; set; }
+        public Vector2 InitialSpeed { get; set; } = new Vector2(1, 1);
+        public float MaxSpeed { get; set; } = 5;
+        public Vector2 MoveDirection { get; set; } = new Vector2(10, 10);
+        public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
+        private MoveManger mover = new MoveManger();
+
+
 
         public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture)
         {
@@ -42,6 +53,13 @@ namespace Project_Game_development
 
             mouseReader = new MouseReader();
             rotationManager = new RotationManager(this, mouseReader);
+
+            Keyboard = new KeyboardReader();
+        }
+
+        private void UpdateMoveDirection()
+        {
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -58,6 +76,10 @@ namespace Project_Game_development
             mouseReader.Update();
             rotationManager.Update();
             currentAnimation.Update(gameTime);
+
+
+            Keyboard.UpdateDirection(this);
+            mover.Move(this);
         }
     }
 }
