@@ -57,11 +57,6 @@ namespace Project_Game_development
             Keyboard = new KeyboardReader();
         }
 
-        private void UpdateMoveDirection()
-        {
-
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
