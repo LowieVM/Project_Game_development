@@ -16,31 +16,22 @@ namespace Project_Game_development
     {
         private Texture2D currentTexture;
         private Animation currentAnimation;
-
         private SpriteEffects effect = SpriteEffects.None;
+        private RotationManager rotationManager;
+        private MouseReader mouseReader;
+        private Dictionary<PlayerState, SpriteProperties> playerStateMappings;
+        private MoveManager mover;
+
+        private PlayerShootManager playerShootManager;
         public Vector2 Position { get; set; } = new Vector2(50, 50);
         public PlayerState PlayerState { get; set; }
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; }
-        private RotationManager rotationManager;
-        private MouseReader mouseReader;
-        private Dictionary<PlayerState, SpriteProperties> playerStateMappings;
-
-
-
-
-
         public KeyboardReader Keyboard { get; set; }
         public Vector2 InitialSpeed { get; set; } = new Vector2(1, 1);
         public float MaxSpeed { get; set; } = 5;
         public Vector2 MoveDirection { get; set; } = new Vector2(10, 10);
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
-        private MoveManager mover = new MoveManager();
-
-        private Texture2D bulletTexture;
-
-        private MouseState mouseState;
-        private BulletManager bulletManager;
 
 
 
@@ -63,52 +54,28 @@ namespace Project_Game_development
 
             mouseReader = new MouseReader();
             rotationManager = new RotationManager(this, mouseReader);
-
             Keyboard = new KeyboardReader();
-
-
-
-
-            bulletManager = new BulletManager(bulletTexture);
-
+            mover = new MoveManager();
+            playerShootManager = new PlayerShootManager(this, bulletTexture);
         }
 
-        private bool wasLeftButtonPressed = false;
-
-        public void CreateBullet()
-        {
-            mouseState = Mouse.GetState();
-            if (mouseState.LeftButton == ButtonState.Pressed && !wasLeftButtonPressed)
-            {
-                Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                bulletManager.CreateBullet(Position, mousePosition);
-            }
-
-            wasLeftButtonPressed = (mouseState.LeftButton == ButtonState.Pressed);
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            bulletManager.Draw(spriteBatch);
+            playerShootManager.Draw(spriteBatch);
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
         }
 
         public void Update(GameTime gameTime)
         {
-
-            CreateBullet();
-            bulletManager.Update(gameTime);
-
-
             currentTexture = playerStateMappings[PlayerState].Texture;
             currentAnimation = playerStateMappings[PlayerState].Animation;
             RotationPoint = playerStateMappings[PlayerState].RotationPoint;
 
+            playerShootManager.Update(gameTime);
             mouseReader.Update();
             rotationManager.Update();
             currentAnimation.Update(gameTime);
-
-
             Keyboard.UpdateDirection(this);
             mover.Move(this);
         }
