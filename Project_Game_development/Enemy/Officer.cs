@@ -26,13 +26,8 @@ namespace Project_Game_development
         private OfficerState currentState;
         public Officer(Vector2 position)
         {
-            EnemyStateMappings = new Dictionary<OfficerState, SpriteProperties>
-            {
-                { OfficerState.Walking, new SpriteProperties(GameTextures.OfficerWalkTexture, 12, 8, 1, GameTextures.OfficerWalkRotationPoint) },
-                { OfficerState.WalkingPistol, new SpriteProperties(GameTextures.OfficerPistolWalkTexture, 12, 6, 1, GameTextures.OfficerPistolWalkRotationPoint) },
-                { OfficerState.Pistol, new SpriteProperties(GameTextures.OfficerPistolTexture, GameTextures.OfficerPistolRotationPoint) },
-                { OfficerState.Dying, new SpriteProperties(GameTextures.OfficerDieTexture, 12, 4, 1, GameTextures.OfficerDieRotationPoint) },
-            };
+            EnemyStateMappings = ((OfficerState[])Enum.GetValues(typeof(OfficerState))).ToDictionary(state => state, state => GameTextures.GetOfficerProperties(state));
+
 
             Position = position;
 
