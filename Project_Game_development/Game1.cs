@@ -13,7 +13,7 @@ namespace Project_Game_development
 
         private Player player;
 
-        private Enemy officer;
+        private Officer officer;
 
 
         public Game1()
@@ -32,7 +32,7 @@ namespace Project_Game_development
             // TODO: Add your initialization logic here
             base.Initialize();
             player = new Player(new Vector2(50, 50));
-            officer = new Enemy(new Vector2(500, 500));
+            officer = new Officer(new Vector2(500, 500));
         }
 
         protected override void LoadContent()

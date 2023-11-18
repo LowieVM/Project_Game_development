@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    enum EnemyState { Walking, WalkingPistol, Pistol, Dying }
-    internal class Enemy : IRotatable, IMovable
+    enum OfficerState { Walking, WalkingPistol, Pistol, Dying }
+    internal class Officer : IRotatable, IMovable
     {
         public Vector2 Position { get; set; } = new Vector2(200, 200);
         public Vector2 InitialSpeed { get; set; } = new Vector2(5, 5);
@@ -19,24 +19,24 @@ namespace Project_Game_development
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; } = new Vector2(0, 0);
 
-        private Dictionary<EnemyState, SpriteProperties> EnemyStateMappings;
+        private Dictionary<OfficerState, SpriteProperties> EnemyStateMappings;
         private SpriteEffects effect = SpriteEffects.None;
         private Texture2D currentTexture;
         private Animation currentAnimation;
-        private EnemyState currentState;
-        public Enemy(Vector2 position)
+        private OfficerState currentState;
+        public Officer(Vector2 position)
         {
-            EnemyStateMappings = new Dictionary<EnemyState, SpriteProperties>
+            EnemyStateMappings = new Dictionary<OfficerState, SpriteProperties>
             {
-                { EnemyState.Walking, new SpriteProperties(GameTextures.OfficerWalkTexture, 12, 8, 1, GameTextures.OfficerWalkRotationPoint) },
-                { EnemyState.WalkingPistol, new SpriteProperties(GameTextures.OfficerPistolWalkTexture, 12, 6, 1, GameTextures.OfficerPistolWalkRotationPoint) },
-                { EnemyState.Pistol, new SpriteProperties(GameTextures.OfficerPistolTexture, GameTextures.OfficerPistolRotationPoint) },
-                { EnemyState.Dying, new SpriteProperties(GameTextures.OfficerDieTexture, 12, 4, 1, GameTextures.OfficerDieRotationPoint) },
+                { OfficerState.Walking, new SpriteProperties(GameTextures.OfficerWalkTexture, 12, 8, 1, GameTextures.OfficerWalkRotationPoint) },
+                { OfficerState.WalkingPistol, new SpriteProperties(GameTextures.OfficerPistolWalkTexture, 12, 6, 1, GameTextures.OfficerPistolWalkRotationPoint) },
+                { OfficerState.Pistol, new SpriteProperties(GameTextures.OfficerPistolTexture, GameTextures.OfficerPistolRotationPoint) },
+                { OfficerState.Dying, new SpriteProperties(GameTextures.OfficerDieTexture, 12, 4, 1, GameTextures.OfficerDieRotationPoint) },
             };
 
             Position = position;
 
-            currentState = EnemyState.Pistol;
+            currentState = OfficerState.Pistol;
             currentTexture = EnemyStateMappings[currentState].Texture;
             currentAnimation = EnemyStateMappings[currentState].Animation;
         }
