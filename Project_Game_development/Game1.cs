@@ -18,6 +18,11 @@ namespace Project_Game_development
         private Texture2D playerMinigunShootTexture;
         private Texture2D playerFlamethrowerTexture;
 
+        private Texture2D officerWalkTexture;
+        private Texture2D officerPistolWalkTexture;
+        private Texture2D officerPistolTexture;
+        private Texture2D offcerDieTexture;
+
         private Texture2D bulletTexture;
 
         private Player player;
