@@ -51,12 +51,8 @@ namespace Project_Game_development
                 case PlayerState.Flamethrower:
                     return new SpriteProperties(PlayerFlamethrowerTexture, PlayerFlamethrowerRotationPoint);
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException($"{state}: no Sprite(Properties) for this PlayerState");
             }
-
-
-
-            return new SpriteProperties(PlayerWalkTexture, 12, 6, 1, PlayerWalkRotationPoint);
         }
 
 
