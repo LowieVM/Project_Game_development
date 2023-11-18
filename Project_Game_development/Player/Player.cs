@@ -38,17 +38,7 @@ namespace Project_Game_development
 
         public Player(Vector2 position)
         {
-            playerStateMappings = new Dictionary<PlayerState, SpriteProperties>
-            {
-                { PlayerState.Walking, new SpriteProperties(GameTextures.PlayerWalkTexture, 12, 6, 1, GameTextures.PlayerWalkRotationPoint) },
-                { PlayerState.Running, new SpriteProperties(GameTextures.PlayerRunTexture, 12, 6, 1, GameTextures.PlayerRunRotationPoint) },
-                { PlayerState.Pistol, new SpriteProperties(GameTextures.PlayerPistolTexture, GameTextures.PlayerPistolRotationPoint) },
-                { PlayerState.Shotgun, new SpriteProperties(GameTextures.PlayerShotgunTexture, GameTextures.PlayerShotgunRotationPoint) },
-                { PlayerState.ShotgunReloading, new SpriteProperties(GameTextures.PlayerShotgunReloadTexture, 12, 5, 1, GameTextures.PlayerShotgunReloadRotationPoint) },
-                { PlayerState.MiniGun, new SpriteProperties(GameTextures.PlayerMinigunTexture, GameTextures.PlayerMinigunRotationPoint) },
-                { PlayerState.MiniGunShoot, new SpriteProperties(GameTextures.PlayerMinigunShootTexture, 12, 2, 1, GameTextures.PlayerMinigunShootRotationPoint) },
-                { PlayerState.Flamethrower, new SpriteProperties(GameTextures.PlayerFlamethrowerTexture, GameTextures.PlayerFlamethrowerRotationPoint) }
-            };
+            playerStateMappings = ((PlayerState[])Enum.GetValues(typeof(PlayerState))).ToDictionary(state => state, state => GameTextures.GetPlayerProperties(state));
 
             State = PlayerState.Pistol;
 
@@ -62,12 +52,6 @@ namespace Project_Game_development
         }
 
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            playerShootManager.Draw(spriteBatch);
-            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
-        }
-
         public void Update(GameTime gameTime)
         {
             currentTexture = playerStateMappings[State].Texture;
@@ -80,6 +64,12 @@ namespace Project_Game_development
             currentAnimation.Update(gameTime);
             Keyboard.UpdateDirection(this);
             mover.Move(this);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            playerShootManager.Draw(spriteBatch);
+            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
         }
     }
 }
