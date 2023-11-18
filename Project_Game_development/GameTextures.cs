@@ -11,8 +11,6 @@ namespace Project_Game_development
 {
     internal static class GameTextures
     {
-        public static Texture2D PlayerWalkTexture { get; set; }
-
         public static void LoadContent(ContentManager content)
         {
             PlayerWalkTexture = content.Load<Texture2D>("player_walk_strip6");
@@ -31,6 +29,38 @@ namespace Project_Game_development
 
             BulletTexture = content.Load<Texture2D>("bullet");
         }
+
+        public static SpriteProperties GetPlayerProperties(PlayerState state)
+        {
+            switch (state)
+            {
+                case PlayerState.Walking:
+                    return new SpriteProperties(PlayerWalkTexture, 12, 6, 1, PlayerWalkRotationPoint);
+                case PlayerState.Running:
+                    return new SpriteProperties(PlayerRunTexture, 12, 6, 1, PlayerRunRotationPoint);
+                case PlayerState.Pistol:
+                    return new SpriteProperties(PlayerPistolTexture, PlayerPistolRotationPoint);
+                case PlayerState.Shotgun:
+                    return new SpriteProperties(PlayerShotgunTexture, PlayerShotgunRotationPoint);
+                case PlayerState.ShotgunReloading:
+                    return new SpriteProperties(PlayerShotgunReloadTexture, 12, 5, 1, PlayerShotgunReloadRotationPoint);
+                case PlayerState.MiniGun:
+                    return new SpriteProperties(PlayerMinigunTexture, PlayerMinigunRotationPoint);
+                case PlayerState.MiniGunShoot:
+                    return new SpriteProperties(PlayerMinigunShootTexture, 12, 2, 1, PlayerMinigunShootRotationPoint);
+                case PlayerState.Flamethrower:
+                    return new SpriteProperties(PlayerFlamethrowerTexture, PlayerFlamethrowerRotationPoint);
+                default:
+                    break;
+            }
+
+
+
+            return new SpriteProperties(PlayerWalkTexture, 12, 6, 1, PlayerWalkRotationPoint);
+        }
+
+
+        public static Texture2D PlayerWalkTexture { get; set; }
         public static Texture2D PlayerRunTexture { get; set; }
         public static Texture2D PlayerPistolTexture { get; set; }
         public static Texture2D PlayerShotgunTexture { get; set; }
