@@ -24,7 +24,7 @@ namespace Project_Game_development
 
         private PlayerShootManager playerShootManager;
         public Vector2 Position { get; set; } = new Vector2(50, 50);
-        public PlayerState PlayerState { get; set; }
+        public PlayerState State { get; set; }
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; }
         public KeyboardReader Keyboard { get; set; }
@@ -50,7 +50,7 @@ namespace Project_Game_development
                 { PlayerState.Flamethrower, new SpriteProperties(flamethrowerTexture, new Vector2(34, 26)) }
             };
 
-            PlayerState = PlayerState.Pistol;
+            State = PlayerState.Pistol;
 
             mouseReader = new MouseReader();
             rotationManager = new RotationManager(this, mouseReader);
@@ -68,9 +68,9 @@ namespace Project_Game_development
 
         public void Update(GameTime gameTime)
         {
-            currentTexture = playerStateMappings[PlayerState].Texture;
-            currentAnimation = playerStateMappings[PlayerState].Animation;
-            RotationPoint = playerStateMappings[PlayerState].RotationPoint;
+            currentTexture = playerStateMappings[State].Texture;
+            currentAnimation = playerStateMappings[State].Animation;
+            RotationPoint = playerStateMappings[State].RotationPoint;
 
             playerShootManager.Update(gameTime);
             mouseReader.Update();
