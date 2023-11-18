@@ -29,7 +29,7 @@ namespace Project_Game_development
 
             movable.Position = movable.Position + distance;
 
-            movable.Position = LimitPosition(movable.Position + distance, 1920, 1080, 20);
+            movable.Position = LimitPosition(movable.Position + distance, 20);
         }
 
         private Vector2 LimitSpeed(Vector2 v, float max)
@@ -43,24 +43,24 @@ namespace Project_Game_development
             return v;
         }
 
-        private Vector2 LimitPosition(Vector2 position, int screenWidth, int screenHeight, int playerWidth)
+        private Vector2 LimitPosition(Vector2 position, int playerWidth)
         {
             if (position.X < playerWidth)
             {
                 position.X = playerWidth;
             }
-            else if (position.X > screenWidth - playerWidth)
+            else if (position.X > GameSettings.ScreenWidth - playerWidth)
             {
-                position.X = screenWidth - playerWidth;
+                position.X = GameSettings.ScreenWidth - playerWidth;
             }
 
             if (position.Y < playerWidth)
             {
                 position.Y = playerWidth;
             }
-            else if (position.Y > screenHeight - playerWidth)
+            else if (position.Y > GameSettings.ScreenHeight - playerWidth)
             {
-                position.Y = screenHeight - playerWidth;
+                position.Y = GameSettings.ScreenHeight - playerWidth;
             }
 
             return position;

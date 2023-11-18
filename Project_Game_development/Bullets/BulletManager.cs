@@ -29,7 +29,7 @@ namespace Project_Game_development
             {
                 bullets[i].Update(gameTime);
 
-                if (IsBulletOutOfBounds(bullets[i].Position, 1920, 1080))
+                if (IsBulletOutOfBounds(bullets[i].Position))
                 {
                     bullets.RemoveAt(i);
                     i--;
@@ -45,9 +45,9 @@ namespace Project_Game_development
             }
         }
 
-        private bool IsBulletOutOfBounds(Vector2 position, int screenWidth, int screenHeight)
+        private bool IsBulletOutOfBounds(Vector2 position)
         {
-            if (position.X < 0 || position.X > screenWidth || position.Y < 0 || position.Y > screenHeight)
+            if (position.X < 0 || position.X > GameSettings.ScreenWidth || position.Y < 0 || position.Y > GameSettings.ScreenHeight)
             {
                 return true;
             }
