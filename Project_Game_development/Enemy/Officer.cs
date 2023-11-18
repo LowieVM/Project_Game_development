@@ -27,6 +27,7 @@ namespace Project_Game_development
         private Animation currentAnimation;
         private OfficerState currentState;
         private MoveManager mover;
+        private RotationManager rotationManager;
         public Officer(Vector2 position, IPositional target)
         {
             EnemyStateMappings = ((OfficerState[])Enum.GetValues(typeof(OfficerState))).ToDictionary(state => state, state => GameTextures.GetOfficerProperties(state));
@@ -40,11 +41,14 @@ namespace Project_Game_development
 
             this.target = target;
             mover = new MoveManager();
+            rotationManager = new RotationManager(this, target);
 
         }
 
         public void Update(GameTime gameTime)
         {
+            rotationManager.Update();
+
             MoveDirection = Vector2.Normalize(target.Position - Position);
             if (Vector2.Distance(Position, target.Position) < 50)
             {
