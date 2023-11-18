@@ -56,6 +56,25 @@ namespace Project_Game_development
         }
 
 
+
+        public static SpriteProperties GetOfficerProperties(OfficerState state)
+        {
+            switch (state)
+            {
+                case OfficerState.Walking:
+                    return new SpriteProperties(OfficerWalkTexture, OfficerWalkRotationPoint);
+                case OfficerState.WalkingPistol:
+                    return new SpriteProperties(OfficerPistolWalkTexture, OfficerPistolWalkRotationPoint);
+                case OfficerState.Pistol:
+                    return new SpriteProperties(OfficerPistolTexture, OfficerPistolRotationPoint);
+                case OfficerState.Dying:
+                    return new SpriteProperties(OfficerDieTexture, OfficerDieRotationPoint);
+                default:
+                    throw new ArgumentOutOfRangeException($"{state}: no Sprite(Properties) for this OfficerState");
+            }
+        }
+
+
         public static Texture2D PlayerWalkTexture { get; set; }
         public static Texture2D PlayerRunTexture { get; set; }
         public static Texture2D PlayerPistolTexture { get; set; }
