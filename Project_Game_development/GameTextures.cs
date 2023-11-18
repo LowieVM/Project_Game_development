@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,25 @@ namespace Project_Game_development
     internal static class GameTextures
     {
         public static Texture2D PlayerWalkTexture { get; set; }
+
+        public static void LoadContent(ContentManager content)
+        {
+            PlayerWalkTexture = content.Load<Texture2D>("player_walk_strip6");
+            PlayerRunTexture = content.Load<Texture2D>("player_run_strip6");
+            PlayerPistolTexture = content.Load<Texture2D>("player_9mmhandgun");
+            PlayerShotgunTexture = content.Load<Texture2D>("player_pumpgun_stand");
+            PlayerShotgunReloadTexture = content.Load<Texture2D>("player_pumgun_reload_strip5");
+            PlayerMinigunTexture = content.Load<Texture2D>("player_chaingun");
+            PlayerMinigunShootTexture = content.Load<Texture2D>("player_chaingun_shoot_strip2");
+            PlayerFlamethrowerTexture = content.Load<Texture2D>("player_flamethrower");
+
+            OfficerWalkTexture = content.Load<Texture2D>("officer_walk_strip");
+            OfficerPistolWalkTexture = content.Load<Texture2D>("officer_shoot_strip");
+            OfficerPistolTexture = content.Load<Texture2D>("officer_pistol");
+            OfficerDieTexture = content.Load<Texture2D>("officer_die_strip");
+
+            BulletTexture = content.Load<Texture2D>("bullet");
+        }
         public static Texture2D PlayerRunTexture { get; set; }
         public static Texture2D PlayerPistolTexture { get; set; }
         public static Texture2D PlayerShotgunTexture { get; set; }

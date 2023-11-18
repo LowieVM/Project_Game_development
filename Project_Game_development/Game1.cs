@@ -9,21 +9,7 @@ namespace Project_Game_development
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        private Texture2D playerWalkTexture;
-        private Texture2D playerRunTexture;
-        private Texture2D playerPistolTexture;
-        private Texture2D playerShotgunTexture;
-        private Texture2D playerShotgunReloadTexture;
-        private Texture2D playerMinigunTexture;
-        private Texture2D playerMinigunShootTexture;
-        private Texture2D playerFlamethrowerTexture;
 
-        private Texture2D officerWalkTexture;
-        private Texture2D officerPistolWalkTexture;
-        private Texture2D officerPistolTexture;
-        private Texture2D officerDieTexture;
-
-        private Texture2D bulletTexture;
 
         private Player player;
 
@@ -45,8 +31,8 @@ namespace Project_Game_development
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            player = new Player(playerWalkTexture, playerRunTexture, playerPistolTexture, playerShotgunTexture, playerShotgunReloadTexture, playerMinigunTexture, playerMinigunShootTexture, playerFlamethrowerTexture, bulletTexture);
-            officer = new Enemy(officerWalkTexture, officerPistolWalkTexture, officerPistolTexture, officerDieTexture);
+            player = new Player(new Vector2(50, 50));
+            officer = new Enemy(new Vector2(500, 500));
         }
 
         protected override void LoadContent()
@@ -54,22 +40,7 @@ namespace Project_Game_development
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            playerWalkTexture = Content.Load<Texture2D>("player_walk_strip6");
-            playerRunTexture = Content.Load<Texture2D>("player_run_strip6");
-            playerPistolTexture = Content.Load<Texture2D>("player_9mmhandgun");
-            playerShotgunTexture = Content.Load<Texture2D>("player_pumpgun_stand");
-            playerShotgunReloadTexture = Content.Load<Texture2D>("player_pumgun_reload_strip5");
-            playerMinigunTexture = Content.Load<Texture2D>("player_chaingun");
-            playerMinigunShootTexture = Content.Load<Texture2D>("player_chaingun_shoot_strip2");
-            playerFlamethrowerTexture = Content.Load<Texture2D>("player_flamethrower");
-
-            officerWalkTexture = Content.Load<Texture2D>("officer_walk_strip");
-            officerPistolWalkTexture = Content.Load<Texture2D>("officer_shoot_strip");
-            officerPistolTexture = Content.Load<Texture2D>("officer_pistol");
-            officerDieTexture = Content.Load<Texture2D>("officer_die_strip");
-
-            bulletTexture = Content.Load<Texture2D>("bullet");
-
+            GameTextures.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
