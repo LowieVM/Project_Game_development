@@ -11,16 +11,15 @@ namespace Project_Game_development
     internal class BulletManager
     {
         private List<Bullet> bullets = new List<Bullet>();
-        private Texture2D bulletTexture;
 
-        public BulletManager(Texture2D bulletTexture)
+        public BulletManager()
         {
-            this.bulletTexture = bulletTexture;
+
         }
 
         public void CreateBullet(Vector2 position, Vector2 target)
         {
-            bullets.Add(new Bullet(bulletTexture, position, target));
+            bullets.Add(new Bullet(position, target));
         }
 
         public void Update(GameTime gameTime)

@@ -16,9 +16,9 @@ namespace Project_Game_development
         private bool wasLeftButtonPressed = false;
         private IPositional player;
 
-        public PlayerShootManager(IPositional player, Texture2D bulletTexture)
+        public PlayerShootManager(IPositional player)
         {
-            bulletManager = new BulletManager(bulletTexture);
+            bulletManager = new BulletManager();
             this.player = player;
         }
 

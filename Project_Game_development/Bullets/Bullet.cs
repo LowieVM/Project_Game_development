@@ -21,14 +21,14 @@ namespace Project_Game_development
         public float Rotation { get; set; }
         public Vector2 RotationPoint { get; set; } = new Vector2(20, 13);
 
-        public Bullet(Texture2D texture, Vector2 position, Vector2 target)
+        public Bullet(Vector2 position, Vector2 target)
         {
             InitialSpeed = new Vector2(10, 10);
             MaxSpeed = 10;
             this.Position = position;
             this.MoveDirection = Vector2.Normalize(target - Position);
 
-            this.texture = texture;
+            this.texture = GameTextures.BulletTexture;
             animation = new Animation(1, texture, 1, 1);
         }
 
@@ -43,7 +43,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0f);
+            spriteBatch.Draw(GameTextures.BulletTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0f);
         }
 
     }

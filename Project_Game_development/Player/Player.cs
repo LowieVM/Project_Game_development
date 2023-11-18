@@ -36,27 +36,29 @@ namespace Project_Game_development
 
 
 
-        public Player(Texture2D walkTexture, Texture2D runTexture, Texture2D pistolTexture, Texture2D shotgunTexture, Texture2D shotgunReloadTexture, Texture2D minigunTexture, Texture2D minigunShootTexture, Texture2D flamethrowerTexture, Texture2D bulletTexture)
+        public Player(Vector2 position)
         {
             playerStateMappings = new Dictionary<PlayerState, SpriteProperties>
             {
-                { PlayerState.Walking, new SpriteProperties(walkTexture, 12, 6, 1, new Vector2(17, 31)) },
-                { PlayerState.Running, new SpriteProperties(runTexture, 12, 6, 1, new Vector2(45, 45)) },
-                { PlayerState.Pistol, new SpriteProperties(pistolTexture, new Vector2(26, 31)) },
-                { PlayerState.Shotgun, new SpriteProperties(shotgunTexture, new Vector2(34, 26)) },
-                { PlayerState.ShotgunReloading, new SpriteProperties(shotgunReloadTexture, 12, 5, 1, new Vector2(34, 26)) },
-                { PlayerState.MiniGun, new SpriteProperties(minigunTexture, new Vector2(13, 15)) },
-                { PlayerState.MiniGunShoot, new SpriteProperties(minigunShootTexture, 12, 2, 1, new Vector2(13, 15)) },
-                { PlayerState.Flamethrower, new SpriteProperties(flamethrowerTexture, new Vector2(34, 26)) }
+                { PlayerState.Walking, new SpriteProperties(GameTextures.PlayerWalkTexture, 12, 6, 1, GameTextures.PlayerWalkRotationPoint) },
+                { PlayerState.Running, new SpriteProperties(GameTextures.PlayerRunTexture, 12, 6, 1, GameTextures.PlayerRunRotationPoint) },
+                { PlayerState.Pistol, new SpriteProperties(GameTextures.PlayerPistolTexture, GameTextures.PlayerPistolRotationPoint) },
+                { PlayerState.Shotgun, new SpriteProperties(GameTextures.PlayerShotgunTexture, GameTextures.PlayerShotgunRotationPoint) },
+                { PlayerState.ShotgunReloading, new SpriteProperties(GameTextures.PlayerShotgunReloadTexture, 12, 5, 1, GameTextures.PlayerShotgunReloadRotationPoint) },
+                { PlayerState.MiniGun, new SpriteProperties(GameTextures.PlayerMinigunTexture, GameTextures.PlayerMinigunRotationPoint) },
+                { PlayerState.MiniGunShoot, new SpriteProperties(GameTextures.PlayerMinigunShootTexture, 12, 2, 1, GameTextures.PlayerMinigunShootRotationPoint) },
+                { PlayerState.Flamethrower, new SpriteProperties(GameTextures.PlayerFlamethrowerTexture, GameTextures.PlayerFlamethrowerRotationPoint) }
             };
 
             State = PlayerState.Pistol;
+
+            Position = position;
 
             mouseReader = new MouseReader();
             rotationManager = new RotationManager(this, mouseReader);
             Keyboard = new KeyboardReader();
             mover = new MoveManager();
-            playerShootManager = new PlayerShootManager(this, bulletTexture);
+            playerShootManager = new PlayerShootManager(this);
         }
 
 

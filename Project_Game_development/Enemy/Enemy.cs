@@ -24,15 +24,18 @@ namespace Project_Game_development
         private Texture2D currentTexture;
         private Animation currentAnimation;
         private EnemyState currentState;
-        public Enemy(Texture2D walkTexture, Texture2D walkPistol, Texture2D pistolTexture, Texture2D dieTexture)
+        public Enemy(Vector2 position)
         {
             EnemyStateMappings = new Dictionary<EnemyState, SpriteProperties>
             {
-                { EnemyState.Walking, new SpriteProperties(walkTexture, 12, 8, 1, new Vector2(17, 31)) },
-                { EnemyState.WalkingPistol, new SpriteProperties(walkPistol, 12, 6, 1, new Vector2(45, 45)) },
-                { EnemyState.Pistol, new SpriteProperties(pistolTexture, new Vector2(26, 31)) },
-                { EnemyState.Dying, new SpriteProperties(dieTexture, 12, 4, 1, new Vector2(34, 26)) },
+                { EnemyState.Walking, new SpriteProperties(GameTextures.OfficerWalkTexture, 12, 8, 1, GameTextures.OfficerWalkRotationPoint) },
+                { EnemyState.WalkingPistol, new SpriteProperties(GameTextures.OfficerPistolWalkTexture, 12, 6, 1, GameTextures.OfficerPistolWalkRotationPoint) },
+                { EnemyState.Pistol, new SpriteProperties(GameTextures.OfficerPistolTexture, GameTextures.OfficerPistolRotationPoint) },
+                { EnemyState.Dying, new SpriteProperties(GameTextures.OfficerDieTexture, 12, 4, 1, GameTextures.OfficerDieRotationPoint) },
             };
+
+            Position = position;
+
             currentState = EnemyState.Pistol;
             currentTexture = EnemyStateMappings[currentState].Texture;
             currentAnimation = EnemyStateMappings[currentState].Animation;
