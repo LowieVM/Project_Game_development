@@ -35,7 +35,7 @@ namespace Project_Game_development
 
             Position = position;
 
-            currentState = OfficerState.Pistol;
+            currentState = OfficerState.WalkingPistol;
             currentTexture = EnemyStateMappings[currentState].Texture;
             currentAnimation = EnemyStateMappings[currentState].Animation;
 

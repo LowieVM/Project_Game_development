@@ -62,13 +62,13 @@ namespace Project_Game_development
             switch (state)
             {
                 case OfficerState.Walking:
-                    return new SpriteProperties(OfficerWalkTexture, OfficerWalkRotationPoint);
+                    return new SpriteProperties(OfficerWalkTexture, 12, 8, 1, OfficerWalkRotationPoint);
                 case OfficerState.WalkingPistol:
-                    return new SpriteProperties(OfficerPistolWalkTexture, OfficerPistolWalkRotationPoint);
+                    return new SpriteProperties(OfficerPistolWalkTexture, 10, 6, 1, OfficerPistolWalkRotationPoint);
                 case OfficerState.Pistol:
                     return new SpriteProperties(OfficerPistolTexture, OfficerPistolRotationPoint);
                 case OfficerState.Dying:
-                    return new SpriteProperties(OfficerDieTexture, OfficerDieRotationPoint);
+                    return new SpriteProperties(OfficerDieTexture, 4, 4, 1, OfficerDieRotationPoint);
                 default:
                     throw new ArgumentOutOfRangeException($"{state}: no Sprite(Properties) for this OfficerState");
             }
