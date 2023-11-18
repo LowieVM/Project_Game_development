@@ -21,11 +21,13 @@ namespace Project_Game_development
         private Texture2D officerWalkTexture;
         private Texture2D officerPistolWalkTexture;
         private Texture2D officerPistolTexture;
-        private Texture2D offcerDieTexture;
+        private Texture2D officerDieTexture;
 
         private Texture2D bulletTexture;
 
         private Player player;
+
+        private Enemy officer;
 
 
         public Game1()
@@ -44,6 +46,7 @@ namespace Project_Game_development
             // TODO: Add your initialization logic here
             base.Initialize();
             player = new Player(playerWalkTexture, playerRunTexture, playerPistolTexture, playerShotgunTexture, playerShotgunReloadTexture, playerMinigunTexture, playerMinigunShootTexture, playerFlamethrowerTexture, bulletTexture);
+            officer = new Enemy(officerWalkTexture, officerPistolWalkTexture, officerPistolTexture, officerDieTexture);
         }
 
         protected override void LoadContent()
@@ -60,6 +63,11 @@ namespace Project_Game_development
             playerMinigunShootTexture = Content.Load<Texture2D>("player_chaingun_shoot_strip2");
             playerFlamethrowerTexture = Content.Load<Texture2D>("player_flamethrower");
 
+            officerWalkTexture = Content.Load<Texture2D>("officer_walk_strip");
+            officerPistolWalkTexture = Content.Load<Texture2D>("officer_shoot_strip");
+            officerPistolTexture = Content.Load<Texture2D>("officer_pistol");
+            officerDieTexture = Content.Load<Texture2D>("officer_die_strip");
+
             bulletTexture = Content.Load<Texture2D>("bullet");
 
         }
@@ -71,6 +79,7 @@ namespace Project_Game_development
 
             // TODO: Add your update logic here
             player.Update(gameTime);
+            officer.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -82,6 +91,7 @@ namespace Project_Game_development
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             player.Draw(spriteBatch);
+            officer.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
