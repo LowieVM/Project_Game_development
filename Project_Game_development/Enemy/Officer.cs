@@ -12,7 +12,7 @@ namespace Project_Game_development
     internal class Officer : IRotatable, IMovable
     {
         public Vector2 Position { get; set; } = new Vector2(200, 200);
-        public Vector2 InitialSpeed { get; set; } = new Vector2(0.1f, 0.1f);
+        public Vector2 InitialSpeed { get; set; } = new Vector2(0.5f, 0.5f);
         public float MaxSpeed { get; set; } = 3;
         public Vector2 MoveDirection { get; set; } = new Vector2(0, 0);
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
@@ -28,6 +28,8 @@ namespace Project_Game_development
         private OfficerState currentState;
         private MoveManager mover;
         private RotationManager rotationManager;
+
+        private MoveBehavior moveBehavior;
         public Officer(Vector2 position, IPositional target)
         {
             EnemyStateMappings = ((OfficerState[])Enum.GetValues(typeof(OfficerState))).ToDictionary(state => state, state => GameTextures.GetOfficerProperties(state));
@@ -43,17 +45,15 @@ namespace Project_Game_development
             mover = new MoveManager();
             rotationManager = new RotationManager(this, target);
 
+            moveBehavior = new MoveBehavior();
+
         }
 
         public void Update(GameTime gameTime)
         {
             rotationManager.Update();
 
-            MoveDirection = Vector2.Normalize(target.Position - Position);
-            if (Vector2.Distance(Position, target.Position) < 50)
-            {
-                MoveDirection = Vector2.Zero;
-            }
+            moveBehavior.UpdateDirection(this, target);
 
             mover.Move(this);
 
@@ -65,7 +65,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, effect, 0f);
+            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1.2f, effect, 0f);
         }
     }
 }
