@@ -9,16 +9,13 @@ namespace Project_Game_development
 {
     internal class MoveBehaviorRandom : MoveBehavior
     {
-        private Vector2 initialDirection;
         private Random random;
 
         public override Vector2 MoveDirection { get; set; }
 
-        public MoveBehaviorRandom(IPositional initialDirection)
+        public MoveBehaviorRandom()
         {
-            this.initialDirection = initialDirection.Position;
-            this.MoveDirection = initialDirection.Position;
-            this.random = new Random();
+            random = new Random();
         }
 
         public override void UpdateMoveDirection(IMovable movable)
