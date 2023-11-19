@@ -2,75 +2,60 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
     enum OfficerState { Walking, WalkingPistol, Pistol, Dying }
     internal class Officer : IRotatable, IMovable
     {
+        public OfficerState CurrentState { get; set; }
         public Vector2 Position { get; set; } = new Vector2(200, 200);
+        public float Rotation { get; set; }
+        public Vector2 RotationPoint { get; set; }
         public Vector2 InitialSpeed { get; set; } = new Vector2(0.5f, 0.5f);
         public float MaxSpeed { get; set; } = 3;
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
-        public float Rotation { get; set; } = 0;
-        public Vector2 RotationPoint { get; set; } = new Vector2(0, 0);
-
+        public MoveBehavior MoveBehavior { get; set; }
         public IPositional target { get; set; }
 
         private Dictionary<OfficerState, SpriteProperties> EnemyStateMappings;
-        private SpriteEffects effect = SpriteEffects.None;
         private Texture2D currentTexture;
         private Animation currentAnimation;
-        private OfficerState currentState;
-        private MoveManager mover;
         private RotationManager rotationManager;
+        private MoveManager mover;
         private AutoShootManager autoShootManager;
 
-        public MoveBehavior MoveBehavior { get; set; }
         public Officer(Vector2 position, IPositional target)
         {
             EnemyStateMappings = ((OfficerState[])Enum.GetValues(typeof(OfficerState))).ToDictionary(state => state, state => GameTextures.GetOfficerProperties(state));
-
-
+            CurrentState = OfficerState.WalkingPistol;
             Position = position;
-
-            currentState = OfficerState.WalkingPistol;
-            currentTexture = EnemyStateMappings[currentState].Texture;
-            currentAnimation = EnemyStateMappings[currentState].Animation;
-
             this.target = target;
-            mover = new MoveManager();
+            
             rotationManager = new RotationManager(this, target);
-
+            mover = new MoveManager();
             MoveBehavior = new MoveBehaviorFollow(target);
-            MoveBehavior = new MoveBehaviorKeepDistance(target);
-            MoveBehavior = new MoveBehaviorRandom();
-
             autoShootManager = new AutoShootManager(this, target);
-
         }
+
 
         public void Update(GameTime gameTime)
         {
-            rotationManager.Update();
-            autoShootManager.Update(gameTime);
+            currentTexture = EnemyStateMappings[CurrentState].Texture;
+            currentAnimation = EnemyStateMappings[CurrentState].Animation;
+            RotationPoint = EnemyStateMappings[CurrentState].RotationPoint;
 
             mover.Move(this, MoveBehavior);
-
-            currentTexture = EnemyStateMappings[currentState].Texture;
-            currentAnimation = EnemyStateMappings[currentState].Animation;
-            RotationPoint = EnemyStateMappings[currentState].RotationPoint;
+            rotationManager.Update();
+            autoShootManager.Update(gameTime);
             currentAnimation.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             autoShootManager.Draw(spriteBatch);
-            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1.2f, effect, 0f);
+            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1.2f, SpriteEffects.None, 0f);
         }
     }
 }
