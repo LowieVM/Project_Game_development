@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal class Point : IPositional
+    internal class GamePosition : IPositional
     {
         public Vector2 Position { get; set; }
     }
