@@ -33,8 +33,26 @@ namespace Project_Game_development
         }
         public void Move(IMovable movable, MoveBehavior moveBehavior)
         {
-            moveBehavior.UpdateDirection(movable);
-            Move(movable);
+            Vector2 direction = moveBehavior.GetDirection(movable);
+
+
+            Vector2 distance = direction * movable.InitialSpeed;
+
+            if (distance.X != 0 || distance.Y != 0)
+            {
+                currentAcceleration += movable.Acceleration;
+            }
+            else
+            {
+                currentAcceleration = new Vector2(1, 1);
+            }
+
+            distance *= currentAcceleration;
+            distance = LimitSpeed(distance, movable.MaxSpeed);
+
+            movable.Position = movable.Position + distance;
+
+            movable.Position = LimitPosition(movable.Position + distance, 20);
         }
 
         private Vector2 LimitSpeed(Vector2 v, float max)
