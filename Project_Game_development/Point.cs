@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Project_Game_development
 {
-    internal abstract class MoveBehavior
+    internal class Point : IPositional
     {
-        public abstract Vector2 MoveDirection { get; set; }
-        public abstract void UpdateMoveDirection(IMovable movable);
+        public Vector2 Position { get; set; }
     }
 }

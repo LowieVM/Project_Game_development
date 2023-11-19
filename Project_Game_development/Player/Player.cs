@@ -30,11 +30,8 @@ namespace Project_Game_development
         public KeyboardReader Keyboard { get; set; }
         public Vector2 InitialSpeed { get; set; } = new Vector2(1, 1);
         public float MaxSpeed { get; set; } = 5;
-        public Vector2 MoveDirection { get; set; } = new Vector2(10, 10);
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
-
-
-
+        public MoveBehavior MoveBehavior { get; set; }
 
         public Player(Vector2 position)
         {
@@ -49,6 +46,8 @@ namespace Project_Game_development
             Keyboard = new KeyboardReader();
             mover = new MoveManager();
             playerShootManager = new PlayerShootManager(this);
+
+            MoveBehavior = new MoveBehaviorKeyboard();
         }
 
 
@@ -63,7 +62,7 @@ namespace Project_Game_development
             rotationManager.Update();
             currentAnimation.Update(gameTime);
             Keyboard.UpdateDirection(this);
-            mover.Move(this);
+            mover.Move(this, MoveBehavior);
         }
 
         public void Draw(SpriteBatch spriteBatch)

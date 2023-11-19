@@ -11,7 +11,7 @@ namespace Project_Game_development
     {
         Vector2 InitialSpeed { get; set; }
         float MaxSpeed { get; set; }
-        Vector2 MoveDirection { get; set; }
+        MoveBehavior MoveBehavior { get; set; }
         Vector2 Acceleration { get; set; }
     }
 }

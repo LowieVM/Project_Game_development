@@ -28,7 +28,7 @@ namespace Project_Game_development
             if (mouseState.LeftButton == ButtonState.Pressed && !wasLeftButtonPressed)
             {
                 Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                bulletManager.CreateBullet(player.Position, mousePosition);
+                bulletManager.CreateBullet(player.Position, new Point() { Position = mousePosition});
             }
             wasLeftButtonPressed = (mouseState.LeftButton == ButtonState.Pressed);
 

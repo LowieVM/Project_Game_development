@@ -15,28 +15,30 @@ namespace Project_Game_development
         private SpriteEffects effect = SpriteEffects.None;
         public Vector2 InitialSpeed { get; set; }
         public float MaxSpeed { get; set; }
-        public Vector2 MoveDirection { get; set; }
         public Vector2 Acceleration { get; set; }
         public Vector2 Position { get; set; }
         public float Rotation { get; set; }
         public Vector2 RotationPoint { get; set; } = new Vector2(20, 13);
+        public MoveBehavior MoveBehavior { get; set; }
 
-        public Bullet(Vector2 position, Vector2 target)
+        public Bullet(Vector2 position, IPositional target)
         {
             InitialSpeed = new Vector2(10, 10);
             MaxSpeed = 10;
             this.Position = position;
-            this.MoveDirection = Vector2.Normalize(target - Position);
 
             this.texture = GameTextures.BulletTexture;
             animation = new Animation(1, texture, 1, 1);
+
+            MoveBehavior = new MoveBehaviorFollow(target);
+            MoveBehavior.UpdateMoveDirection(this);
         }
 
         public void Update(GameTime gameTime)
         {
-            Position += MoveDirection * InitialSpeed;
+            Position += MoveBehavior.MoveDirection * InitialSpeed;
 
-            Rotation = (float)Math.Atan2(MoveDirection.Y, MoveDirection.X);
+            Rotation = (float)Math.Atan2(MoveBehavior.MoveDirection.Y, MoveBehavior.MoveDirection.X);
 
             animation.Update(gameTime);
         }

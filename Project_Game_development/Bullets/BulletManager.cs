@@ -17,7 +17,7 @@ namespace Project_Game_development
 
         }
 
-        public void CreateBullet(Vector2 position, Vector2 target)
+        public void CreateBullet(Vector2 position, IPositional target)
         {
             bullets.Add(new Bullet(position, target));
         }

@@ -14,8 +14,8 @@ namespace Project_Game_development
         public Vector2 Position { get; set; }
         public Vector2 InitialSpeed { get; set; }
         public float MaxSpeed { get; set; }
-        public Vector2 MoveDirection { get; set; }
         public Vector2 Acceleration { get; set; }
+        public MoveBehavior MoveBehavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Character()
         {

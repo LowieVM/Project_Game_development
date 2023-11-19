@@ -12,25 +12,8 @@ namespace Project_Game_development
     {
         public void UpdateDirection(Player movable)
         {
-            Vector2 MoveDirection = Vector2.Zero;
             KeyboardState state = Keyboard.GetState();
 
-            if (state.IsKeyDown(Keys.Left) || state.IsKeyDown(Keys.A))
-            {
-                MoveDirection.X -= 1;
-            }
-            if (state.IsKeyDown(Keys.Right) || state.IsKeyDown(Keys.D))
-            {
-                MoveDirection.X += 1;
-            }
-            if (state.IsKeyDown(Keys.Up) || state.IsKeyDown(Keys.W))
-            {
-                MoveDirection.Y -= 1;
-            }
-            if (state.IsKeyDown(Keys.Down) || state.IsKeyDown(Keys.S))
-            {
-                MoveDirection.Y += 1;
-            }
             if (state.IsKeyDown(Keys.D1) || state.IsKeyDown(Keys.NumPad1))
             {
                 movable.State = PlayerState.Walking;
@@ -63,7 +46,6 @@ namespace Project_Game_development
             {
                 movable.State = PlayerState.Flamethrower;
             }
-            movable.MoveDirection = MoveDirection;
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Project_Game_development
         public Vector2 Position { get; set; } = new Vector2(200, 200);
         public Vector2 InitialSpeed { get; set; } = new Vector2(0.5f, 0.5f);
         public float MaxSpeed { get; set; } = 3;
-        public Vector2 MoveDirection { get; set; } = new Vector2(0, 0);
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; } = new Vector2(0, 0);
@@ -29,7 +28,7 @@ namespace Project_Game_development
         private MoveManager mover;
         private RotationManager rotationManager;
 
-        private MoveBehavior moveBehavior;
+        public MoveBehavior MoveBehavior { get; set; }
         public Officer(Vector2 position, IPositional target)
         {
             EnemyStateMappings = ((OfficerState[])Enum.GetValues(typeof(OfficerState))).ToDictionary(state => state, state => GameTextures.GetOfficerProperties(state));
@@ -45,7 +44,7 @@ namespace Project_Game_development
             mover = new MoveManager();
             rotationManager = new RotationManager(this, target);
 
-            moveBehavior = new MoveBehavior(target);
+            MoveBehavior = new MoveBehaviorFollow(target);
 
         }
 
@@ -55,7 +54,7 @@ namespace Project_Game_development
 
             //moveBehavior.UpdateDirection(this, target);
 
-            mover.Move(this, moveBehavior);
+            mover.Move(this, MoveBehavior);
 
             currentTexture = EnemyStateMappings[currentState].Texture;
             currentAnimation = EnemyStateMappings[currentState].Animation;
