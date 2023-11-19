@@ -19,7 +19,7 @@ namespace Project_Game_development
         public float Rotation { get; set; } = 0;
         public Vector2 RotationPoint { get; set; } = new Vector2(0, 0);
 
-        private IPositional target;
+        public IPositional target { get; set; }
 
         private Dictionary<OfficerState, SpriteProperties> EnemyStateMappings;
         private SpriteEffects effect = SpriteEffects.None;
@@ -28,6 +28,7 @@ namespace Project_Game_development
         private OfficerState currentState;
         private MoveManager mover;
         private RotationManager rotationManager;
+        private AutoShootManager autoShootManager;
 
         public MoveBehavior MoveBehavior { get; set; }
         public Officer(Vector2 position, IPositional target)
@@ -49,12 +50,14 @@ namespace Project_Game_development
             MoveBehavior = new MoveBehaviorKeepDistance(target);
             MoveBehavior = new MoveBehaviorRandom();
 
+            autoShootManager = new AutoShootManager(this, target);
+
         }
 
         public void Update(GameTime gameTime)
         {
             rotationManager.Update();
-
+            autoShootManager.Update(gameTime);
 
             mover.Move(this, MoveBehavior);
 
@@ -66,6 +69,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            autoShootManager.Draw(spriteBatch);
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1.2f, effect, 0f);
         }
     }
