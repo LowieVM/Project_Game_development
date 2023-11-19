@@ -9,7 +9,13 @@ namespace Project_Game_development
 {
     internal class MoveBehavior
     {
-        public void UpdateDirection(IMovable movable, IPositional target)
+        public IPositional target { get; set; }
+
+        public MoveBehavior(IPositional target)
+        {
+            this.target = target;
+        }
+        public void UpdateDirection(IMovable movable)
         {
             movable.MoveDirection = Vector2.Normalize(target.Position - movable.Position);
             if (Vector2.Distance(movable.Position, target.Position) < 50)

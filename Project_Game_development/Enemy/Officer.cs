@@ -45,7 +45,7 @@ namespace Project_Game_development
             mover = new MoveManager();
             rotationManager = new RotationManager(this, target);
 
-            moveBehavior = new MoveBehavior();
+            moveBehavior = new MoveBehavior(target);
 
         }
 
@@ -53,9 +53,9 @@ namespace Project_Game_development
         {
             rotationManager.Update();
 
-            moveBehavior.UpdateDirection(this, target);
+            //moveBehavior.UpdateDirection(this, target);
 
-            mover.Move(this);
+            mover.Move(this, moveBehavior);
 
             currentTexture = EnemyStateMappings[currentState].Texture;
             currentAnimation = EnemyStateMappings[currentState].Animation;

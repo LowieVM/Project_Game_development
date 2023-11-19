@@ -10,11 +10,11 @@ namespace Project_Game_development
     internal class MoveManager
     {
         private Vector2 currentAcceleration = new Vector2(1, 1);
+
         public void Move(IMovable movable)
         {
-
             Vector2 distance = movable.MoveDirection * movable.InitialSpeed;
-            
+
             if (distance.X != 0 || distance.Y != 0)
             {
                 currentAcceleration += movable.Acceleration;
@@ -30,6 +30,11 @@ namespace Project_Game_development
             movable.Position = movable.Position + distance;
 
             movable.Position = LimitPosition(movable.Position + distance, 20);
+        }
+        public void Move(IMovable movable, MoveBehavior moveBehavior)
+        {
+            moveBehavior.UpdateDirection(movable);
+            Move(movable);
         }
 
         private Vector2 LimitSpeed(Vector2 v, float max)
