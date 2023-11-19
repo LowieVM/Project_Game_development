@@ -47,6 +47,7 @@ namespace Project_Game_development
 
             MoveBehavior = new MoveBehaviorFollow(target);
             MoveBehavior = new MoveBehaviorKeepDistance(target);
+            MoveBehavior = new MoveBehaviorRandom(target);
 
         }
 

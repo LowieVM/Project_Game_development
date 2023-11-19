@@ -30,7 +30,7 @@ namespace Project_Game_development
             this.texture = GameTextures.BulletTexture;
             animation = new Animation(1, texture, 1, 1);
 
-            MoveBehavior = new MoveBehaviorFollow(target);
+            MoveBehavior = new MoveBehaviorFollow(target) { ClosestDistance = 0 };
             MoveBehavior.UpdateMoveDirection(this);
         }
 

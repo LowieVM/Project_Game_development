@@ -11,6 +11,7 @@ namespace Project_Game_development
     {
         public IPositional target { get; set; }
         public override Vector2 MoveDirection { get; set; }
+        public int ClosestDistance { get; set; } = 50;
 
         public MoveBehaviorFollow(IPositional target)
         {
@@ -20,7 +21,7 @@ namespace Project_Game_development
         {
             Vector2 direction = Vector2.Zero;
 
-            if (Vector2.Distance(movable.Position, target.Position) > 50)
+            if (Vector2.Distance(movable.Position, target.Position) > ClosestDistance)
             {
                 direction = Vector2.Normalize(target.Position - movable.Position);
             }
