@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,7 @@ namespace Project_Game_development
             rotationManager = new RotationManager(this, target);
 
             MoveBehavior = new MoveBehaviorFollow(target);
+            MoveBehavior = new MoveBehaviorKeepDistance(target);
 
         }
 
@@ -52,7 +54,6 @@ namespace Project_Game_development
         {
             rotationManager.Update();
 
-            //moveBehavior.UpdateDirection(this, target);
 
             mover.Move(this, MoveBehavior);
 

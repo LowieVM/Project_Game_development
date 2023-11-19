@@ -42,7 +42,11 @@ namespace Project_Game_development
                 v.X *= ratio;
                 v.Y *= ratio;
             }
-            return v;
+            if (!(float.IsNaN(v.X) || float.IsNaN(v.X)))
+            {
+                return v;
+            }
+            return Vector2.Zero;
         }
 
         private Vector2 LimitPosition(Vector2 position, int playerWidth)
