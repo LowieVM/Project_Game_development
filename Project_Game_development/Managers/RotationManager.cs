@@ -7,9 +7,12 @@ namespace Project_Game_development
     {
         private IPositional target;
         private IRotatable rotatable;
-        public RotationManager(IRotatable rotatable, IPositional target)
+        public RotationManager(IRotatable rotatable)
         {
             this.rotatable = rotatable;
+        }
+        public RotationManager(IRotatable rotatable, IPositional target) : this(rotatable)
+        {
             this.target = target;
         }
 
@@ -20,8 +23,11 @@ namespace Project_Game_development
 
         public void Update()
         {
-            Vector2 playerToTarget = target.Position - rotatable.Position;
-            rotatable.Rotation = (float)Math.Atan2(playerToTarget.Y, playerToTarget.X);
+            if (target != null)
+            {
+                Vector2 playerToTarget = target.Position - rotatable.Position;
+                rotatable.Rotation = (float)Math.Atan2(playerToTarget.Y, playerToTarget.X);
+            }
         }
     }
 }
