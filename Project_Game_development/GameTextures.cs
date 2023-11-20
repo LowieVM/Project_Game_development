@@ -26,6 +26,17 @@ namespace Project_Game_development
             BulletTexture = content.Load<Texture2D>("bullet");
         }
 
+
+        public static SpriteProperties GetProperties<TState>(TState state) where TState : Enum
+        {
+            return state switch
+            {
+                PlayerState playerState => GetPlayerProperties(playerState),
+                OfficerState officerState => GetOfficerProperties(officerState),
+                _ => throw new TypeAccessException($"{typeof(TState)} is not a valid type"),
+            };
+        }
+
         public static SpriteProperties GetPlayerProperties(PlayerState state)
         {
             switch (state)
@@ -50,8 +61,6 @@ namespace Project_Game_development
                     throw new ArgumentOutOfRangeException($"{state}: no Sprite(Properties) for this PlayerState");
             }
         }
-
-
 
         public static SpriteProperties GetOfficerProperties(OfficerState state)
         {
