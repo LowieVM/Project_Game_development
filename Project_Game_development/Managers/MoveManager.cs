@@ -12,7 +12,7 @@ namespace Project_Game_development
 
             Vector2 distance = moveBehavior.MoveDirection * movable.InitialSpeed;
 
-            if (distance.X != 0 || distance.Y != 0)
+            if (distance != Vector2.Zero)
             {
                 currentAcceleration += movable.Acceleration;
             }
@@ -34,8 +34,7 @@ namespace Project_Game_development
             if (v.Length() > max)
             {
                 float ratio = max / v.Length();
-                v.X *= ratio;
-                v.Y *= ratio;
+                v *= ratio;
             }
             if (!(float.IsNaN(v.X) || float.IsNaN(v.X)))
             {
@@ -46,23 +45,8 @@ namespace Project_Game_development
 
         private Vector2 LimitPosition(Vector2 position, int playerWidth)
         {
-            if (position.X < playerWidth)
-            {
-                position.X = playerWidth;
-            }
-            else if (position.X > GameSettings.ScreenWidth - playerWidth)
-            {
-                position.X = GameSettings.ScreenWidth - playerWidth;
-            }
-
-            if (position.Y < playerWidth)
-            {
-                position.Y = playerWidth;
-            }
-            else if (position.Y > GameSettings.ScreenHeight - playerWidth)
-            {
-                position.Y = GameSettings.ScreenHeight - playerWidth;
-            }
+            position.X = MathHelper.Clamp(position.X, playerWidth, GameSettings.ScreenWidth - playerWidth);
+            position.Y = MathHelper.Clamp(position.Y, playerWidth, GameSettings.ScreenHeight - playerWidth);
 
             return position;
         }

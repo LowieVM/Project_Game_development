@@ -31,13 +31,8 @@ namespace Project_Game_development
 
             if (elapsedTime >= 1.0 / Fps)
             {
-                currentFrameNum++;
+                currentFrameNum = (currentFrameNum + 1) % frames.Count;
                 elapsedTime = 0;
-            }
-
-            if (currentFrameNum >= frames.Count)
-            {
-                currentFrameNum = 0;
             }
         }
 
