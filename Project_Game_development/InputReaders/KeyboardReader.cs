@@ -4,7 +4,7 @@ namespace Project_Game_development
 {
     internal class KeyboardReader
     {
-        public void UpdateDirection(Player movable)
+        public void UpdateState(Player movable)
         {
             KeyboardState state = Keyboard.GetState();
 
