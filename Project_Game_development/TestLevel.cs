@@ -11,7 +11,7 @@ namespace Project_Game_development
     internal class TestLevel
     {
         private Player player;
-        private List<Officer> officers;
+        private List<Officer> officers = new List<Officer>();
         public TestLevel()
         {
             player = new Player(new Vector2(50,50));

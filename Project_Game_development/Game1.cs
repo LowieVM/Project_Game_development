@@ -10,10 +10,7 @@ namespace Project_Game_development
         private SpriteBatch spriteBatch;
 
 
-
-        private Player player;
-
-        private Officer officer;
+        private TestLevel testLevel;
 
 
         public Game1()
@@ -31,8 +28,7 @@ namespace Project_Game_development
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            player = new Player(new Vector2(50, 50));
-            officer = new Officer(new Vector2(500, 500), player);
+            testLevel = new TestLevel();
         }
 
         protected override void LoadContent()
@@ -49,9 +45,7 @@ namespace Project_Game_development
                 Exit();
 
             // TODO: Add your update logic here
-            player.Update(gameTime);
-            officer.Update(gameTime);
-
+            testLevel.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -61,8 +55,7 @@ namespace Project_Game_development
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            player.Draw(spriteBatch);
-            officer.Draw(spriteBatch);
+            testLevel.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
