@@ -25,7 +25,6 @@ namespace Project_Game_development
             base.Update(gameTime);
 
             autoShootManager.Update(gameTime);
-            rotationManager.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
