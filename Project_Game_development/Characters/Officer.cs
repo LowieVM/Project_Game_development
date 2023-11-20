@@ -8,14 +8,14 @@ namespace Project_Game_development
     {
         public IPositional target { get; set; }
 
-        private AutoShootManager autoShootManager;
+        public AutoShootManager autoShootManager { get; set; }
 
         public Officer(Vector2 position, IPositional target) : base(position)
         {
             this.target = target;
             rotationManager.SetTarget(target);
 
-            MoveBehavior = new MoveBehaviorFollow(target);
+            MoveBehavior = new MoveBehaviorRandom();
             autoShootManager = new AutoShootManager(this, target);
         }
 

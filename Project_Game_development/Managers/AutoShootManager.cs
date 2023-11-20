@@ -6,7 +6,7 @@ namespace Project_Game_development
 {
     internal class AutoShootManager
     {
-        private BulletManager bulletManager;
+        public BulletManager bulletManager { get; set; }
         private IPositional enemy;
         public IPositional target { get; set; }
         private Random random;

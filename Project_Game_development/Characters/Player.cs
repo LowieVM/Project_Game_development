@@ -8,7 +8,7 @@ namespace Project_Game_development
     {
         public KeyboardReader Keyboard { get; set; }
 
-        private PlayerShootManager playerShootManager;
+        public PlayerShootManager playerShootManager { get; set; }
         private MouseReader mouseReader;
 
         public Player(Vector2 position) : base(position)

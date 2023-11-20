@@ -6,7 +6,7 @@ namespace Project_Game_development
 {
     internal class BulletManager
     {
-        private List<Bullet> bullets = new List<Bullet>();
+        public List<Bullet> bullets { get; set; } = new List<Bullet>();
 
         public BulletManager()
         {

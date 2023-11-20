@@ -6,7 +6,7 @@ namespace Project_Game_development
 {
     internal class PlayerShootManager
     {
-        private BulletManager bulletManager;
+        public BulletManager bulletManager { get; set; }
         private MouseState mouseState;
         private bool wasLeftButtonPressed = false;
         private IPositional player;
