@@ -9,14 +9,16 @@ namespace Project_Game_development
     internal class TestLevel
     {
         private Player player;
-        private List<Officer> officers = new List<Officer>();
+        private List<IHittable> playerTeam = new List<IHittable>();
+        private List<IHittable> officers = new List<IHittable>();
         private Random random = new Random();
         public TestLevel()
         {
-            player = new Player(new Vector2(50, 50));
+            player = new Player(new Vector2(50, 50), officers);
+            playerTeam.Add(player);
             for (int i = 0; i < 20; i++)
             {
-                officers.Add(new Officer(new Vector2(random.Next(0, 1920), random.Next(0, 1080)), player) { MaxSpeed = 2});
+                officers.Add(new Officer(new Vector2(random.Next(0, 1920), random.Next(0, 1080)), playerTeam) { MaxSpeed = 2});
             }
         }
         public void Update(GameTime gameTime)
@@ -25,31 +27,14 @@ namespace Project_Game_development
             {
                 for (int i = 0; i < 20; i++)
                 {
-                    officers.Add(new Officer(new Vector2(random.Next(0, 1920), random.Next(0, 1080)), player) { MaxSpeed = 2 });
+                    officers.Add(new Officer(new Vector2(random.Next(0, 1920), random.Next(0, 1080)), playerTeam) { MaxSpeed = 2 });
                 }
             }
-
-
 
             player.Update(gameTime);
             foreach (var officer in officers)
             {
                 officer.Update(gameTime);
-            }
-
-            List<Officer> officersToRemove = new List<Officer>();
-
-            for (int i = officers.Count - 1; i >= 0; i--)
-            {
-                for (int ii = player.playerShootManager.bulletManager.bullets.Count - 1; ii >= 0; ii--)
-                {
-                    if (Vector2.Distance(player.playerShootManager.bulletManager.bullets[ii].Position, officers[i].Position) < 20 && officers[i].isAlive)
-                    {
-                        officers[i].TakeDamage(50);
-                        player.playerShootManager.bulletManager.bullets.RemoveAt(ii);
-                        break;
-                    }
-                }
             }
         }
 

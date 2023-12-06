@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Project_Game_development
 {
-    internal abstract class Character<TState> : IRotatable, IMovable where TState : Enum
+    internal abstract class Character<TState> : IRotatable, IMovable, IHittable where TState : Enum
     {
         public TState CurrentState { get; set; }
         public Vector2 Position { get; set; }
@@ -18,6 +18,8 @@ namespace Project_Game_development
         public MoveBehavior MoveBehavior { get; set; }
         public int Health { get; set; } = 100;
         public bool isAlive { get; set; } = true;
+        public List<IHittable> enemies { get; set; }
+        public float TimeSinceDeath { get; private set; } = 0;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;
         protected Texture2D currentTexture;
@@ -25,7 +27,7 @@ namespace Project_Game_development
         protected RotationManager rotationManager;
         protected MoveManager mover;
 
-        public Character(Vector2 position)
+        public Character(Vector2 position, List<IHittable> enemies)
         {
             stateMappings = ((TState[])Enum.GetValues(typeof(TState))).ToDictionary(state => state, state => GameTextures.GetProperties(state));
             Position = position;
@@ -33,6 +35,8 @@ namespace Project_Game_development
 
             rotationManager = new RotationManager(this);
             mover = new MoveManager();
+
+            this.enemies = enemies;
         }
 
         public void TakeDamage(int damage)
@@ -48,6 +52,12 @@ namespace Project_Game_development
 
         public virtual void Update(GameTime gameTime)
         {
+            if (!isAlive)
+            {
+                TimeSinceDeath += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                return;
+            }
+
             currentTexture = stateMappings[CurrentState].Texture;
             currentAnimation = stateMappings[CurrentState].Animation;
             RotationPoint = stateMappings[CurrentState].RotationPoint;

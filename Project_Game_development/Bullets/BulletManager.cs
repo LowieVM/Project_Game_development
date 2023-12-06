@@ -7,10 +7,11 @@ namespace Project_Game_development
     internal class BulletManager
     {
         public List<Bullet> bullets { get; set; } = new List<Bullet>();
+        public List<IHittable> enemies { get; set; } = new List<IHittable>();
 
-        public BulletManager()
+        public BulletManager(List<IHittable> enemies)
         {
-
+            this.enemies = enemies;
         }
 
         public void CreateBullet(Vector2 position, IPositional target)
@@ -20,14 +21,25 @@ namespace Project_Game_development
 
         public void Update(GameTime gameTime)
         {
-            for (int i = 0; i < bullets.Count; i++)
+            for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 bullets[i].Update(gameTime);
 
                 if (IsBulletOutOfBounds(bullets[i].Position))
                 {
                     bullets.RemoveAt(i);
-                    i--;
+                }
+                else
+                {
+                    for (int ii = 0; ii < enemies.Count; ii++)
+                    {
+                        if (Vector2.Distance(bullets[i].Position, enemies[ii].Position) < 20 && enemies[ii].isAlive)
+                        {
+                            enemies[ii].TakeDamage(50);
+                            bullets.RemoveAt(i);
+                            break;
+                        }
+                    }
                 }
             }
         }

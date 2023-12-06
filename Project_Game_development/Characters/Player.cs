@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Project_Game_development
 {
@@ -11,13 +12,13 @@ namespace Project_Game_development
         public PlayerShootManager playerShootManager { get; set; }
         private MouseReader mouseReader;
 
-        public Player(Vector2 position) : base(position)
+        public Player(Vector2 position, List<IHittable> enemies) : base(position, enemies)
         {
             mouseReader = new MouseReader();
             rotationManager.SetTarget(mouseReader);
 
             MoveBehavior = new MoveBehaviorKeyboard();
-            playerShootManager = new PlayerShootManager(this);
+            playerShootManager = new PlayerShootManager(this, enemies);
             Keyboard = new KeyboardReader();
         }
 

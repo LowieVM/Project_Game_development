@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Project_Game_development
 {
@@ -10,13 +11,13 @@ namespace Project_Game_development
 
         public AutoShootManager autoShootManager { get; set; }
 
-        public Officer(Vector2 position, IPositional target) : base(position)
+        public Officer(Vector2 position, List<IHittable> enemies) : base(position, enemies)
         {
             this.target = target;
             rotationManager.SetTarget(target);
 
             MoveBehavior = new MoveBehaviorRandom();
-            autoShootManager = new AutoShootManager(this, target);
+            autoShootManager = new AutoShootManager(this, enemies);
         }
 
 

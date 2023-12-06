@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Project_Game_development
 {
@@ -11,9 +12,9 @@ namespace Project_Game_development
         private bool wasLeftButtonPressed = false;
         private IPositional player;
 
-        public PlayerShootManager(IPositional player)
+        public PlayerShootManager(IPositional player, List<IHittable> enemies)
         {
-            bulletManager = new BulletManager();
+            bulletManager = new BulletManager(enemies);
             this.player = player;
         }
 

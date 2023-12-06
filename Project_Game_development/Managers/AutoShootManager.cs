@@ -1,28 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Project_Game_development
 {
     internal class AutoShootManager
     {
         public BulletManager bulletManager { get; set; }
-        private IPositional enemy;
+        private IPositional shooter;
         public IPositional target { get; set; }
         private Random random;
         private double elapsedTime = 0;
         private int randomTime;
 
-        public AutoShootManager(IPositional enemy)
+        public AutoShootManager(IPositional shooter, List<IHittable> enemies)
         {
-            bulletManager = new BulletManager();
-            this.enemy = enemy;
+            bulletManager = new BulletManager(enemies);
+            this.target = enemies.FirstOrDefault();
+            this.shooter = shooter;
             random = new Random();
             randomTime = random.Next(1,5);
-        }
-        public AutoShootManager(IPositional enemy, IPositional target) : this(enemy)
-        {
-            this.target = target;
         }
 
         public void Update(GameTime gameTime)
@@ -33,7 +32,7 @@ namespace Project_Game_development
 
                 if (elapsedTime >= randomTime)
                 {
-                    bulletManager.CreateBullet(enemy.Position, new GamePosition() { Position = target.Position });
+                    bulletManager.CreateBullet(shooter.Position, new GamePosition() { Position = target.Position });
                     elapsedTime = 0;
                     randomTime = random.Next(1, 5);
                 }
