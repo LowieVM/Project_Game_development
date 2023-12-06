@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Reflection.Metadata;
 
 namespace Project_Game_development
 {
@@ -24,6 +25,8 @@ namespace Project_Game_development
             OfficerDieTexture = content.Load<Texture2D>("officer_die_strip");
 
             BulletTexture = content.Load<Texture2D>("bullet");
+
+            ArialFont = content.Load<SpriteFont>("ArialFont");
         }
 
 
@@ -95,6 +98,8 @@ namespace Project_Game_development
         public static Texture2D OfficerDieTexture { get; set; }
 
         public static Texture2D BulletTexture { get; set; }
+
+        public static SpriteFont ArialFont { get; set; }
 
 
         public static Vector2 PlayerWalkRotationPoint { get; set; } = new Vector2(17, 31);

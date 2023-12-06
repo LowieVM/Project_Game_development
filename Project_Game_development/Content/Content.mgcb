@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:bullet.png
 
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont;ArialFont.spritefont
+
 #begin officer_die_strip.png
 /importer:TextureImporter
 /processor:TextureProcessor
