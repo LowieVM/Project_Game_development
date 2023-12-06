@@ -10,7 +10,7 @@ namespace Project_Game_development
         private SpriteBatch spriteBatch;
 
 
-        private TestLevel testLevel;
+        private GameManager gameManager;
 
 
         public Game1()
@@ -28,7 +28,7 @@ namespace Project_Game_development
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            testLevel = new TestLevel();
+            gameManager = new GameManager();
         }
 
         protected override void LoadContent()
@@ -45,7 +45,7 @@ namespace Project_Game_development
                 Exit();
 
             // TODO: Add your update logic here
-            testLevel.Update(gameTime);
+            gameManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -55,7 +55,7 @@ namespace Project_Game_development
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            testLevel.Draw(spriteBatch);
+            gameManager.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
