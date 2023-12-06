@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Project_Game_development
 {
@@ -13,7 +14,7 @@ namespace Project_Game_development
 
         public Officer(Vector2 position, List<IHittable> enemies) : base(position, enemies)
         {
-            this.target = target;
+            this.target = enemies.FirstOrDefault();
             rotationManager.SetTarget(target);
 
             MoveBehavior = new MoveBehaviorRandom();
@@ -44,7 +45,7 @@ namespace Project_Game_development
                     isAlive = false;
                 }
             }
-            else if (isAlive)
+            else
             {
                 base.Update(gameTime);
             }

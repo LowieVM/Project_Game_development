@@ -15,6 +15,7 @@ namespace Project_Game_development
         public TestLevel()
         {
             player = new Player(new Vector2(50, 50), officers);
+            player.CurrentState = PlayerState.Pistol;
             playerTeam.Add(player);
             for (int i = 0; i < 20; i++)
             {

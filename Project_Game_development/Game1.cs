@@ -54,7 +54,7 @@ namespace Project_Game_development
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             testLevel.Draw(spriteBatch);
             spriteBatch.End();
 

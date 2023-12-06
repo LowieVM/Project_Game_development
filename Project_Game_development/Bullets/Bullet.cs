@@ -41,7 +41,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GameTextures.BulletTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0f);
+            spriteBatch.Draw(GameTextures.BulletTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0.4f);
         }
 
     }

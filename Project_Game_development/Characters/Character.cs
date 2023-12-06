@@ -20,6 +20,7 @@ namespace Project_Game_development
         public bool isAlive { get; set; } = true;
         public List<IHittable> enemies { get; set; }
         public float TimeSinceDeath { get; private set; } = 0;
+        public float LayerDepth { get; set; } = 0.5f;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;
         protected Texture2D currentTexture;
@@ -69,7 +70,7 @@ namespace Project_Game_development
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, SpriteEffects.None, LayerDepth);
         }
     }
 }

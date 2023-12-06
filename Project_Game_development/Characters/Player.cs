@@ -20,6 +20,8 @@ namespace Project_Game_development
             MoveBehavior = new MoveBehaviorKeyboard();
             playerShootManager = new PlayerShootManager(this, enemies);
             Keyboard = new KeyboardReader();
+            Health = 99999;
+            LayerDepth = 0.49f;
         }
 
 
@@ -36,10 +38,9 @@ namespace Project_Game_development
 
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             if (isAlive)
             {
-                base.Update(gameTime);
-
                 Keyboard.UpdateState(this);
                 mouseReader.Update();
                 playerShootManager.Update(gameTime);
