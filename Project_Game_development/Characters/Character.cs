@@ -16,6 +16,7 @@ namespace Project_Game_development
         public float MaxSpeed { get; set; } = 5;
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
         public MoveBehavior MoveBehavior { get; set; }
+        public int Health { get; set; } = 100;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;
         protected Texture2D currentTexture;
@@ -33,6 +34,16 @@ namespace Project_Game_development
             mover = new MoveManager();
         }
 
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
+            if (Health <= 0)
+            {
+                Die();
+            }
+        }
+
+        protected abstract void Die();
 
         public virtual void Update(GameTime gameTime)
         {
