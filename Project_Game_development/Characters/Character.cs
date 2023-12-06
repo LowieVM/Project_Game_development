@@ -17,6 +17,7 @@ namespace Project_Game_development
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
         public MoveBehavior MoveBehavior { get; set; }
         public int Health { get; set; } = 100;
+        public bool isAlive { get; set; } = true;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;
         protected Texture2D currentTexture;

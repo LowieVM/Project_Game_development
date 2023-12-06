@@ -43,9 +43,9 @@ namespace Project_Game_development
             {
                 for (int ii = player.playerShootManager.bulletManager.bullets.Count - 1; ii >= 0; ii--)
                 {
-                    if (Vector2.Distance(player.playerShootManager.bulletManager.bullets[ii].Position, officers[i].Position) < 20)
+                    if (Vector2.Distance(player.playerShootManager.bulletManager.bullets[ii].Position, officers[i].Position) < 20 && officers[i].isAlive)
                     {
-                        officers.RemoveAt(i);
+                        officers[i].TakeDamage(50);
                         player.playerShootManager.bulletManager.bullets.RemoveAt(ii);
                         break;
                     }

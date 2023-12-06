@@ -29,7 +29,7 @@ namespace Project_Game_development
 
         public override void Update(GameTime gameTime)
         {
-            if (CurrentState == OfficerState.Dying)
+            if (CurrentState == OfficerState.Dying && isAlive)
             {
                 currentTexture = stateMappings[CurrentState].Texture;
                 currentAnimation = stateMappings[CurrentState].Animation;
@@ -38,8 +38,12 @@ namespace Project_Game_development
                 {
                     currentAnimation.Update(gameTime);
                 }
+                else
+                {
+                    isAlive = false;
+                }
             }
-            else
+            else if (isAlive)
             {
                 base.Update(gameTime);
             }
