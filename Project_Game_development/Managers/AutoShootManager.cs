@@ -6,25 +6,18 @@ using System.Linq;
 
 namespace Project_Game_development
 {
-    internal class AutoShootManager
+    internal class AutoShootManager : ShootManager
     {
-        public BulletManager bulletManager { get; set; }
-        private IPositional shooter;
-        public IPositional target { get; set; }
-        private Random random;
+        private Random random = new Random();
         private double elapsedTime = 0;
         private int randomTime;
 
-        public AutoShootManager(IPositional shooter, List<IHittable> enemies)
+        public AutoShootManager(IPositional shooter, List<IHittable> enemies) : base(shooter, enemies)
         {
-            bulletManager = new BulletManager(enemies);
-            this.target = enemies.FirstOrDefault();
-            this.shooter = shooter;
-            random = new Random();
             randomTime = random.Next(1,5);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (target != null)
             {
@@ -38,12 +31,12 @@ namespace Project_Game_development
                 }
             }
 
-            bulletManager.Update(gameTime);
+            base.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            bulletManager.Draw(spriteBatch);
+            base.Draw(spriteBatch);
         }
     }
 }

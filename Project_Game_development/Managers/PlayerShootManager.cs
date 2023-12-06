@@ -5,35 +5,32 @@ using System.Collections.Generic;
 
 namespace Project_Game_development
 {
-    internal class PlayerShootManager
+    internal class PlayerShootManager : ShootManager
     {
-        public BulletManager bulletManager { get; set; }
         private MouseState mouseState;
         private bool wasLeftButtonPressed = false;
-        private IPositional player;
 
-        public PlayerShootManager(IPositional player, List<IHittable> enemies)
+        public PlayerShootManager(IPositional shooter, List<IHittable> enemies) : base(shooter, enemies)
         {
-            bulletManager = new BulletManager(enemies);
-            this.player = player;
+
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed && !wasLeftButtonPressed)
             {
                 Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                bulletManager.CreateBullet(player.Position, new GamePosition() { Position = mousePosition});
+                bulletManager.CreateBullet(shooter.Position, new GamePosition() { Position = mousePosition});
             }
             wasLeftButtonPressed = (mouseState.LeftButton == ButtonState.Pressed);
 
-            bulletManager.Update(gameTime);
+            base.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            bulletManager.Draw(spriteBatch);
+            base.Draw(spriteBatch);
         }
     }
 }
