@@ -30,11 +30,6 @@ namespace Project_Game_development
             isAlive = false;
         }
 
-        private void DrawGameOverScreen(SpriteBatch spriteBatch)
-        {
-            spriteBatch.DrawString(GameTextures.ArialFont, "Game Over", new Vector2(200, 200), Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0);
-        }
-
 
         public override void Update(GameTime gameTime)
         {
@@ -53,10 +48,6 @@ namespace Project_Game_development
             {
                 playerShootManager.Draw(spriteBatch);
                 base.Draw(spriteBatch);
-            }
-            else
-            {
-                DrawGameOverScreen(spriteBatch);
             }
         }
     }
