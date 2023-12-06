@@ -20,9 +20,29 @@ namespace Project_Game_development
         }
 
 
+        protected override void Die()
+        {
+            CurrentState = OfficerState.Dying;
+            autoShootManager.target = null;
+        }
+
+
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            if (CurrentState == OfficerState.Dying)
+            {
+                currentTexture = stateMappings[CurrentState].Texture;
+                currentAnimation = stateMappings[CurrentState].Animation;
+                RotationPoint = stateMappings[CurrentState].RotationPoint;
+                if (!currentAnimation.isLastFrame())
+                {
+                    currentAnimation.Update(gameTime);
+                }
+            }
+            else
+            {
+                base.Update(gameTime);
+            }
 
             autoShootManager.Update(gameTime);
         }
