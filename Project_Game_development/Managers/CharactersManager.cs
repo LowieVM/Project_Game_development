@@ -25,7 +25,7 @@ namespace Project_Game_development
 
         public Officer CreateAndAddOfficer(Vector2 position)
         {
-            Officer officer = new Officer(position, playerTeam) { MaxSpeed = 2 };
+            Officer officer = new Officer(position, playerTeam);
             officer.CurrentState = OfficerState.Pistol;
             enemyTeam.Add(officer);
             return officer;

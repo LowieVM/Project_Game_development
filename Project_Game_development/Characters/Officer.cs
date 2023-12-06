@@ -14,6 +14,7 @@ namespace Project_Game_development
         public Officer(Vector2 position, List<IHittable> enemies) : base(position, enemies)
         {
             rotationManager.SetTarget(enemies.FirstOrDefault());
+            MaxSpeed = 2;
 
             MoveBehavior = new MoveBehaviorRandom();
             autoShootManager = new AutoShootManager(this, enemies);
