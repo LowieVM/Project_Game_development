@@ -19,7 +19,7 @@ namespace Project_Game_development
         public int Health { get; set; } = 100;
         public bool isAlive { get; set; } = true;
         public List<IHittable> enemies { get; set; }
-        public float TimeSinceDeath { get; private set; } = 0;
+        public float TimeSinceDeath { get; set; } = 0;
         public float LayerDepth { get; set; } = 0.5f;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;

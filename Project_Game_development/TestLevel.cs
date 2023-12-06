@@ -35,6 +35,11 @@ namespace Project_Game_development
             player.Update(gameTime);
             foreach (var officer in officers)
             {
+                if (officer.TimeSinceDeath > 10)
+                {
+                    officers.Remove(officer);
+                    break;
+                }
                 officer.Update(gameTime);
             }
         }

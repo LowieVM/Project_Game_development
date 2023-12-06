@@ -6,5 +6,7 @@ namespace Project_Game_development
     {
         public void TakeDamage(int damage);
         public bool isAlive { get; set; }
+
+        public float TimeSinceDeath { get; set; }
     }
 }
