@@ -8,49 +8,21 @@ namespace Project_Game_development
 {
     internal class TestLevel
     {
-        private Player player;
-        private List<IHittable> playerTeam = new List<IHittable>();
-        private List<IHittable> officers = new List<IHittable>();
-        private Random random = new Random();
+        CharactersManager cManager;
         public TestLevel()
         {
-            player = new Player(new Vector2(50, 50), officers);
-            player.CurrentState = PlayerState.Pistol;
-            playerTeam.Add(player);
-            for (int i = 0; i < 20; i++)
-            {
-                officers.Add(new Officer(new Vector2(random.Next(0, 1920), random.Next(0, 1080)), playerTeam) { MaxSpeed = 2});
-            }
+            cManager = new CharactersManager();
+            cManager.CreateAndAddPlayer(new Vector2(50, 50));
+            cManager.CreateAndAddRandomOfficer(20, new Rectangle(500, 100, 500, 500));
         }
         public void Update(GameTime gameTime)
         {
-            if (officers.Count <= 1)
-            {
-                for (int i = 0; i < 20; i++)
-                {
-                    officers.Add(new Officer(new Vector2(random.Next(0, 1920), random.Next(0, 1080)), playerTeam) { MaxSpeed = 2 });
-                }
-            }
-
-            player.Update(gameTime);
-            foreach (var officer in officers)
-            {
-                if (officer.TimeSinceDeath > 10)
-                {
-                    officers.Remove(officer);
-                    break;
-                }
-                officer.Update(gameTime);
-            }
+            cManager.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            player.Draw(spriteBatch);
-            foreach (var officer in officers)
-            {
-                officer.Draw(spriteBatch);
-            }
+            cManager.Draw(spriteBatch);
         }
     }
 }
