@@ -33,6 +33,7 @@ namespace Project_Game_development
             if (CurrentState != OfficerState.Dying && autoShootManager.target != null)
             {
                 CurrentState = OfficerState.WalkingPistol;
+                rotationManager.SetTarget(autoShootManager.target);
             }
             else if (CurrentState != OfficerState.Dying && autoShootManager.target == null)
             {
