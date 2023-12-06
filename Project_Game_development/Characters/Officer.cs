@@ -29,11 +29,11 @@ namespace Project_Game_development
 
         public override void Update(GameTime gameTime)
         {
-            if (isAlive && autoShootManager.target != null)
+            if (CurrentState != OfficerState.Dying && autoShootManager.target != null)
             {
                 CurrentState = OfficerState.WalkingPistol;
             }
-            else if (isAlive && autoShootManager.target == null)
+            else if (CurrentState != OfficerState.Dying && autoShootManager.target == null)
             {
                 CurrentState = OfficerState.Walking;
             }
