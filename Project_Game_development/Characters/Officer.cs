@@ -8,14 +8,12 @@ namespace Project_Game_development
     enum OfficerState { Walking, WalkingPistol, Pistol, Dying }
     internal class Officer : Character<OfficerState>
     {
-        public IPositional target { get; set; }
 
         public AutoShootManager autoShootManager { get; set; }
 
         public Officer(Vector2 position, List<IHittable> enemies) : base(position, enemies)
         {
-            this.target = enemies.FirstOrDefault();
-            rotationManager.SetTarget(target);
+            rotationManager.SetTarget(enemies.FirstOrDefault());
 
             MoveBehavior = new MoveBehaviorRandom();
             autoShootManager = new AutoShootManager(this, enemies);
@@ -31,6 +29,14 @@ namespace Project_Game_development
 
         public override void Update(GameTime gameTime)
         {
+            if (isAlive && autoShootManager.target != null)
+            {
+                CurrentState = OfficerState.WalkingPistol;
+            }
+            else if (isAlive && autoShootManager.target == null)
+            {
+                CurrentState = OfficerState.Walking;
+            }
             if (CurrentState == OfficerState.Dying && isAlive)
             {
                 currentTexture = stateMappings[CurrentState].Texture;
