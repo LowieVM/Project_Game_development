@@ -36,6 +36,16 @@ namespace Project_Game_development
             }
         }
 
+        public bool isLastFrame()
+        { 
+            if (frames.Count == currentFrameNum + 1)
+            {
+                CurrentFrame = frames[currentFrameNum];
+                return true;
+            }
+            return false;
+        }
+
         public void GetFrames(Texture2D texture, int xSprites, int ySprites)
         {
             int frameWidth = texture.Width / xSprites;
