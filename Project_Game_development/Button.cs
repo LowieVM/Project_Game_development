@@ -14,12 +14,12 @@ namespace Project_Game_development
         private SpriteFont font;
         private Vector2 startButtonPosition;
         private Rectangle startButtonRectangle;
-        private string text;
+        public string Text { get; set; }
         private MouseState previousMouseState;
 
         public Button(string text, Vector2 position)
         {
-            this.text = text;
+            this.Text = text;
             previousMouseState = Mouse.GetState();
             font = GameTextures.ArialFont;
 
@@ -45,7 +45,7 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, text, startButtonPosition, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, Text, startButtonPosition, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }
