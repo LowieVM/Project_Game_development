@@ -20,7 +20,7 @@ namespace Project_Game_development
             MoveBehavior = new MoveBehaviorKeyboard();
             playerShootManager = new PlayerShootManager(this, enemies);
             Keyboard = new KeyboardReader();
-            Health = 1000;
+            Health = 100;
             LayerDepth = 0.49f;
         }
 
