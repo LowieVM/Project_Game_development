@@ -29,14 +29,14 @@ namespace Project_Game_development
         protected RotationManager rotationManager;
         protected MoveManager mover;
 
-        public Character(Vector2 position, List<IHittable> enemies)
+        public Character(Vector2 position, MoveManager moveManager, List<IHittable> enemies)
         {
             stateMappings = ((TState[])Enum.GetValues(typeof(TState))).ToDictionary(state => state, state => GameTextures.GetProperties(state));
             Position = position;
             CurrentState = Enum.GetValues(typeof(TState)).Cast<TState>().FirstOrDefault();
 
             rotationManager = new RotationManager(this);
-            mover = new MoveManager();
+            mover = moveManager;
 
             this.enemies = enemies;
         }

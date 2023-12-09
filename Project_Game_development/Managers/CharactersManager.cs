@@ -14,30 +14,37 @@ namespace Project_Game_development
         public List<IHittable> playerTeam { get; set; } = new List<IHittable>();
         public List<IHittable> enemyTeam { get; set; } = new List<IHittable>();
         private Random random = new Random();
+        private MoveManager moveManager = new MoveManager();
 
 
         public Player CreateAndAddPlayer(Vector2 position)
         {
-            Player player = new Player(position, enemyTeam);
+            Player player = new Player(position, moveManager, enemyTeam);
             player.CurrentState = PlayerState.Pistol;
             playerTeam.Add(player);
             return player;
         }
 
-        public Officer CreateAndAddOfficer(Vector2 position)
+        public Officer CreateAndAddOfficer(Vector2 position, List<IHittable> team)
         {
-            Officer officer = new Officer(position, playerTeam);
-            officer.CurrentState = OfficerState.Pistol;
-            enemyTeam.Add(officer);
+            List<IHittable> otherTeam;
+            if (team == enemyTeam)
+            {
+                otherTeam = playerTeam;
+            }
+            else
+            {
+                otherTeam = enemyTeam;
+            }
+            Officer officer = new Officer(position, moveManager, otherTeam);
+            team.Add(officer);
             return officer;
         }
 
-        public void CreateAndAddRandomOfficer(int amount, Rectangle spawnZone)
+        public Officer CreateAndAddOfficer(Rectangle spawnZone, List<IHittable> team)
         {
-            for (int i = 0; i < amount; i++)
-            {
-                CreateAndAddOfficer(new Vector2(random.Next(spawnZone.Left, spawnZone.Right), random.Next(spawnZone.Top, spawnZone.Bottom)));
-            }
+            Officer officer = CreateAndAddOfficer(new Vector2(random.Next(spawnZone.Left, spawnZone.Right), random.Next(spawnZone.Top, spawnZone.Bottom)), team);
+            return officer;
         }
 
 

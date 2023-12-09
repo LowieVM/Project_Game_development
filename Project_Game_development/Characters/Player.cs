@@ -12,7 +12,7 @@ namespace Project_Game_development
         public PlayerShootManager playerShootManager { get; set; }
         private MouseReader mouseReader;
 
-        public Player(Vector2 position, List<IHittable> enemies) : base(position, enemies)
+        public Player(Vector2 position, MoveManager moveManager, List<IHittable> enemies) : base(position, moveManager, enemies)
         {
             mouseReader = new MouseReader();
             rotationManager.SetTarget(mouseReader);
