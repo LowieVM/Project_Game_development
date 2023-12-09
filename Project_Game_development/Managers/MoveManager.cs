@@ -4,7 +4,6 @@ namespace Project_Game_development
 {
     internal class MoveManager
     {
-        private Vector2 currentAcceleration = new Vector2(1, 1);
         public void Move(IMovable movable, MoveBehavior moveBehavior)
         {
             moveBehavior.UpdateMoveDirection(movable);
@@ -14,14 +13,14 @@ namespace Project_Game_development
 
             if (distance != Vector2.Zero)
             {
-                currentAcceleration += movable.Acceleration;
+                movable.CurrentAcceleration += movable.Acceleration;
             }
             else
             {
-                currentAcceleration = new Vector2(1, 1);
+                movable.CurrentAcceleration = new Vector2(1, 1);
             }
 
-            distance *= currentAcceleration;
+            distance *= movable.CurrentAcceleration;
             distance = LimitSpeed(distance, movable.MaxSpeed);
 
             movable.Position = movable.Position + distance;

@@ -15,6 +15,7 @@ namespace Project_Game_development
         public Vector2 InitialSpeed { get; set; } = new Vector2(1, 1);
         public float MaxSpeed { get; set; } = 5;
         public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
+        public Vector2 CurrentAcceleration { get; set; } = new Vector2(0.1f, 0.1f);
         public MoveBehavior MoveBehavior { get; set; }
         public int Health { get; set; } = 100;
         public bool isAlive { get; set; } = true;

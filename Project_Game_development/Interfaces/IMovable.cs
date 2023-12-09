@@ -8,5 +8,6 @@ namespace Project_Game_development
         float MaxSpeed { get; set; }
         MoveBehavior MoveBehavior { get; set; }
         Vector2 Acceleration { get; set; }
+        Vector2 CurrentAcceleration { get; set; }
     }
 }
