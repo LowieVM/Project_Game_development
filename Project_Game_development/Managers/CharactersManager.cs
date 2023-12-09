@@ -11,30 +11,36 @@ namespace Project_Game_development
 {
     internal class CharactersManager
     {
-        public List<IHittable> playerTeam { get; set; } = new List<IHittable>();
-        public List<IHittable> enemyTeam { get; set; } = new List<IHittable>();
+        public List<IHittable> PlayerTeam { get; set; }
+        public List<IHittable> EnemyTeam { get; set; }
         private Random random = new Random();
-        private MoveManager moveManager = new MoveManager();
+        private MoveManager moveManager;
 
+        public CharactersManager()
+        {
+            PlayerTeam = new List<IHittable>();
+            EnemyTeam = new List<IHittable>();
+            moveManager = new MoveManager(PlayerTeam, EnemyTeam, new List<IRectangle>());
+        }
 
         public Player CreateAndAddPlayer(Vector2 position)
         {
-            Player player = new Player(position, moveManager, enemyTeam);
+            Player player = new Player(position, moveManager, EnemyTeam);
             player.CurrentState = PlayerState.Pistol;
-            playerTeam.Add(player);
+            PlayerTeam.Add(player);
             return player;
         }
 
         public Officer CreateAndAddOfficer(Vector2 position, List<IHittable> team)
         {
             List<IHittable> otherTeam;
-            if (team == enemyTeam)
+            if (team == EnemyTeam)
             {
-                otherTeam = playerTeam;
+                otherTeam = PlayerTeam;
             }
             else
             {
-                otherTeam = enemyTeam;
+                otherTeam = EnemyTeam;
             }
             Officer officer = new Officer(position, moveManager, otherTeam);
             team.Add(officer);
@@ -50,7 +56,7 @@ namespace Project_Game_development
 
         public void Update(GameTime gameTime)
         {
-            foreach (var goodGuy in playerTeam)
+            foreach (var goodGuy in PlayerTeam)
             {
                 if (goodGuy is Officer)
                 {
@@ -63,11 +69,11 @@ namespace Project_Game_development
                 goodGuy.Update(gameTime);
             }
 
-            foreach (var enemy in enemyTeam)
+            foreach (var enemy in EnemyTeam)
             {
                 if (enemy.TimeSinceDeath > 10)
                 {
-                    enemyTeam.Remove(enemy);
+                    EnemyTeam.Remove(enemy);
                     break;
                 }
                 enemy.Update(gameTime);
@@ -76,12 +82,12 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var goodGuy in playerTeam)
+            foreach (var goodGuy in PlayerTeam)
             {
                 goodGuy.Draw(spriteBatch);
             }
 
-            foreach (var officer in enemyTeam)
+            foreach (var officer in EnemyTeam)
             {
                 officer.Draw(spriteBatch);
             }

@@ -67,11 +67,11 @@ namespace Project_Game_development
             if (gameState == GameState.Playing)
             {
                 CurrentLevel.Update(gameTime);
-                if (!CurrentLevel.cManager.playerTeam[0].isAlive)
+                if (!CurrentLevel.cManager.PlayerTeam[0].isAlive)
                 {
                     gameState = GameState.GameOver;
                 }
-                else if (CurrentLevel.cManager.enemyTeam.Find(enemy => enemy.isAlive) == null)
+                else if (CurrentLevel.cManager.EnemyTeam.Find(enemy => enemy.isAlive) == null)
                 {
                     gameState = GameState.Won;
                 }
