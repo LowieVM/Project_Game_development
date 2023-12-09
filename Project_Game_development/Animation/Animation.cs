@@ -17,6 +17,7 @@ namespace Project_Game_development
             frames = new List<AnimationFrame>();
             Fps = fps;
             GetFrames(texture, xSprites, ySprites);
+            CurrentFrame = frames[currentFrameNum];
         }
 
         public void AddFrame(AnimationFrame frame)
