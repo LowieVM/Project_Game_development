@@ -6,40 +6,33 @@ using System.Linq;
 
 namespace Project_Game_development
 {
-    internal abstract class Character<TState> : IRotatable, IMovable, IHittable, ICircle where TState : Enum
+    internal abstract class Character<TState> : MovableObject, IHittable, ICircle where TState : Enum
     {
         public TState CurrentState { get; set; }
-        public Vector2 Position { get; set; }
-        public float Rotation { get; set; }
-        public Vector2 RotationPoint { get; set; }
-        public Vector2 InitialSpeed { get; set; } = new Vector2(1, 1);
-        public float MaxSpeed { get; set; } = 5;
-        public Vector2 Acceleration { get; set; } = new Vector2(0.1f, 0.1f);
-        public Vector2 CurrentAcceleration { get; set; } = new Vector2(0.1f, 0.1f);
-        public MoveBehavior MoveBehavior { get; set; }
         public int Health { get; set; } = 100;
         public bool isAlive { get; set; } = true;
-        public List<IHittable> enemies { get; set; }
+        public List<IHittable> Enemies { get; set; }
         public float TimeSinceDeath { get; set; } = 0;
         public float LayerDepth { get; set; } = 0.5f;
         public float CircleRadius { get; set; } = 20;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;
-        protected Texture2D currentTexture;
-        protected Animation currentAnimation;
         protected RotationManager rotationManager;
         protected MoveManager mover;
 
-        public Character(Vector2 position, MoveManager moveManager, List<IHittable> enemies)
+        public Character(Vector2 position, MoveManager moveManager, List<IHittable> enemies) : base(position)
         {
+            InitialSpeed = new Vector2(1, 1);
+            MaxSpeed = 5;
+            Acceleration = new Vector2(0.1f, 0.1f);
+            CurrentAcceleration = new Vector2(0.1f, 0.1f);
             stateMappings = ((TState[])Enum.GetValues(typeof(TState))).ToDictionary(state => state, state => GameTextures.GetProperties(state));
-            Position = position;
             CurrentState = Enum.GetValues(typeof(TState)).Cast<TState>().FirstOrDefault();
 
             rotationManager = new RotationManager(this);
             mover = moveManager;
 
-            this.enemies = enemies;
+            this.Enemies = enemies;
         }
 
         public void TakeDamage(int damage)
@@ -53,7 +46,7 @@ namespace Project_Game_development
 
         protected abstract void Die();
 
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (!isAlive)
             {
@@ -70,7 +63,7 @@ namespace Project_Game_development
             currentAnimation.Update(gameTime);
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 1f, SpriteEffects.None, LayerDepth);
         }

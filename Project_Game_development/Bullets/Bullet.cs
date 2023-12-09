@@ -4,45 +4,35 @@ using System;
 
 namespace Project_Game_development
 {
-    internal class Bullet : IMovable, IRotatable
+    internal class Bullet : MovableObject
     {
-        private Texture2D texture;
-        private Animation animation;
         private SpriteEffects effect = SpriteEffects.None;
-        public Vector2 InitialSpeed { get; set; }
-        public float MaxSpeed { get; set; }
-        public Vector2 Acceleration { get; set; }
-        public Vector2 CurrentAcceleration { get; set; }
-        public Vector2 Position { get; set; }
-        public float Rotation { get; set; }
-        public Vector2 RotationPoint { get; set; } = new Vector2(20, 13);
-        public MoveBehavior MoveBehavior { get; set; }
 
-        public Bullet(Vector2 position, IPositional target)
+        public Bullet(Vector2 position, IPositional target) : base(position)
         {
+            RotationPoint = GameTextures.BulletRotationPoint;
             InitialSpeed = new Vector2(10, 10);
             MaxSpeed = 10;
-            this.Position = position;
 
-            this.texture = GameTextures.BulletTexture;
-            animation = new Animation(1, texture, 1, 1);
+            currentTexture = GameTextures.BulletTexture;
+            currentAnimation = new Animation(1, currentTexture, 1, 1);
 
             MoveBehavior = new MoveBehaviorFollow(target) { ClosestDistance = 0 };
             MoveBehavior.UpdateMoveDirection(this);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             Position += MoveBehavior.MoveDirection * InitialSpeed;
 
             Rotation = (float)Math.Atan2(MoveBehavior.MoveDirection.Y, MoveBehavior.MoveDirection.X);
 
-            animation.Update(gameTime);
+            currentAnimation.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GameTextures.BulletTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0.4f);
+            spriteBatch.Draw(currentTexture, Position, currentAnimation.CurrentFrame.SourceRectangle, Color.White, Rotation, RotationPoint, 0.2f, effect, 0.4f);
         }
 
     }

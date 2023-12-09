@@ -63,7 +63,7 @@ namespace Project_Game_development
                     Officer officer = goodGuy as Officer;
                     if (officer.isAlive)
                     {
-                        officer.autoShootManager.target = officer.enemies.FirstOrDefault(enemy => enemy.isAlive);
+                        officer.autoShootManager.target = officer.Enemies.FirstOrDefault(enemy => enemy.isAlive);
                     }
                 }
                 goodGuy.Update(gameTime);
