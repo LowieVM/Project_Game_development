@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Project_Game_development
 {
-    internal abstract class Character<TState> : IRotatable, IMovable, IHittable where TState : Enum
+    internal abstract class Character<TState> : IRotatable, IMovable, IHittable, ICircle where TState : Enum
     {
         public TState CurrentState { get; set; }
         public Vector2 Position { get; set; }
@@ -22,6 +22,7 @@ namespace Project_Game_development
         public List<IHittable> enemies { get; set; }
         public float TimeSinceDeath { get; set; } = 0;
         public float LayerDepth { get; set; } = 0.5f;
+        public float CircleRadius { get; set; } = 20;
 
         protected Dictionary<TState, SpriteProperties> stateMappings;
         protected Texture2D currentTexture;
