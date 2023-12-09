@@ -22,10 +22,12 @@ namespace Project_Game_development
         private Button currentDificulty;
         private Button youWon;
         private string difficultyText = "difficulty: ";
+        private GraphicsDevice graphics;
         public GameState gameState { get; set; }
-        public GameManager()
+        public GameManager(GraphicsDevice graphics)
         {
-            CurrentLevel = new EasyLevel();
+            this.graphics = graphics;
+            CurrentLevel = new EasyLevel(graphics);
             gameState = GameState.MainMenu;
             start = new Button("Start game", new Vector2(GameSettings.ScreenWidth, 200));
             gameOver = new Button("Game over", new Vector2(GameSettings.ScreenWidth, 200));
@@ -43,17 +45,17 @@ namespace Project_Game_development
                 if (easy.IsButtonClicked())
                 {
                     currentDificulty.Text = difficultyText + easy.Text;
-                    CurrentLevel = new EasyLevel();
+                    CurrentLevel = new EasyLevel(graphics);
                 }
                 else if (normal.IsButtonClicked())
                 {
                     currentDificulty.Text = difficultyText + normal.Text;
-                    CurrentLevel = new NormalLevel();
+                    CurrentLevel = new NormalLevel(graphics);
                 }
                 else if (hard.IsButtonClicked())
                 {
                     currentDificulty.Text = difficultyText + hard.Text;
-                    CurrentLevel = new HardLevel();
+                    CurrentLevel = new HardLevel(graphics);
                 }
             }
             if (start.IsButtonClicked() && gameState == GameState.MainMenu)
@@ -97,14 +99,14 @@ namespace Project_Game_development
                 gameOver.Draw(spriteBatch);
                 mainMenu.Draw(spriteBatch);
                 currentDificulty.Text = difficultyText + easy.Text;
-                CurrentLevel = new EasyLevel();
+                CurrentLevel = new EasyLevel(graphics);
             }
             else if (gameState == GameState.Won)
             {
                 youWon.Draw(spriteBatch);
                 mainMenu.Draw(spriteBatch);
                 currentDificulty.Text = difficultyText + easy.Text;
-                CurrentLevel = new EasyLevel();
+                CurrentLevel = new EasyLevel(graphics);
             }
         }
     }

@@ -28,7 +28,7 @@ namespace Project_Game_development
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            gameManager = new GameManager();
+            gameManager = new GameManager(GraphicsDevice);
         }
 
         protected override void LoadContent()

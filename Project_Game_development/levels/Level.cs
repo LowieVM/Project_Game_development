@@ -9,8 +9,10 @@ namespace Project_Game_development
     internal abstract class Level
     {
         public CharactersManager cManager { get; set; }
-        public Level()
+        public Environment CurrentEnvironment { get; set; }
+        public Level(Environment environment)
         {
+            CurrentEnvironment = environment;
             cManager = new CharactersManager();
         }
         public void Update(GameTime gameTime)
@@ -20,6 +22,10 @@ namespace Project_Game_development
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            foreach (var block in CurrentEnvironment.blocks)
+            {
+                block.Draw(spriteBatch);
+            }
             cManager.Draw(spriteBatch);
         }
     }
