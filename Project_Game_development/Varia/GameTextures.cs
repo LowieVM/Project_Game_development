@@ -26,6 +26,8 @@ namespace Project_Game_development
 
             BulletTexture = content.Load<Texture2D>("bullet");
 
+            TileTexture = content.Load<Texture2D>("tile");
+
             ArialFont = content.Load<SpriteFont>("ArialFont");
         }
 
@@ -98,6 +100,8 @@ namespace Project_Game_development
         public static Texture2D OfficerDieTexture { get; set; }
 
         public static Texture2D BulletTexture { get; set; }
+
+        public static Texture2D TileTexture { get; set; }
 
         public static SpriteFont ArialFont { get; set; }
 

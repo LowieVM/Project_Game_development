@@ -16,15 +16,15 @@ namespace Project_Game_development
             Block newBlock = null;
             if (type == 0)
             {
-                newBlock = new Block(x, y, Color.Red, graphics, width, height);
+                newBlock = new Block(x, y, GameTextures.TileTexture, width, height);
             }
             if (type == 1)
             {
-                newBlock = new Block(x, y, Color.Green, graphics, width, height);
+                //newBlock = new Block(x, y, Color.Green, width, height);
             }
             if (type == 2)
             {
-                newBlock = new Block(x, y, Color.Orange, graphics, width, height);
+                //newBlock = new Block(x, y, Color.Orange, width, height);
             }
             return newBlock;
         }

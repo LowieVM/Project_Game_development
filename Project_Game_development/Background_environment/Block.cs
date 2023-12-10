@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1.Effects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +17,18 @@ namespace Project_Game_development
         public bool Passable { get; set; }
         public Color Color { get; set; }
 
-        public Block(int x, int y, Color color, GraphicsDevice graphics, int width, int height)
+        public Block(int x, int y, Texture2D texture, int width, int height)
         {
-            currentTexture = new Texture2D(graphics, 1, 1);
+            currentTexture = texture;
             Position = new Vector2(x, y);
             BoundingBox = new Rectangle(x, y, width, height);
             Passable = false;
-            Color = color;
-            currentTexture.SetData(new[] { color });
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(currentTexture, BoundingBox, Color.White);
-            spriteBatch.Draw(currentTexture, Position, BoundingBox, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(currentTexture, Position, null, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 1f);
         }
     }
 }
