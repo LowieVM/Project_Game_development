@@ -12,10 +12,25 @@ namespace Project_Game_development
     {
         public HardLevel(GraphicsDevice graphicsDevice) : base(new Environment(graphicsDevice))
         {
-            cManager.CreateAndAddPlayer(new Vector2(50, 50));
-            for (int i = 0; i < 20; i++)
+            Player player = cManager.CreateAndAddPlayer(new Vector2(1920/2, 1080/2));
+            player.Health = 245;
+
+            for (int i = 0; i < 10; i++)
             {
-                cManager.CreateAndAddOfficer(new Rectangle(500, 100, 500, 500), cManager.EnemyTeam);
+                for (int ii = 0; ii < 2; ii++)
+                {
+                    Officer officer = cManager.CreateAndAddOfficer(new Vector2((i * 180) + 50, (ii * 1000) + 50), cManager.EnemyTeam);
+                    officer.MoveBehavior = new MoveBehaviorKeepDistance(player) { ClosestDistance = 50 };
+                }
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                for (int ii = 0; ii < 5; ii++)
+                {
+                    Officer officer = cManager.CreateAndAddOfficer(new Vector2((i * 1850) + 50, (ii * 180) + 100), cManager.EnemyTeam);
+                    officer.MoveBehavior = new MoveBehaviorFollow(player) { ClosestDistance = 50 };
+                }
             }
         }
     }
